@@ -5,9 +5,18 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.json();
     
+    // 환경 변수 디버깅
+    console.log('=== 환경 변수 디버깅 ===');
+    console.log('GMAIL_USER:', process.env.GMAIL_USER);
+    console.log('GMAIL_PASS:', process.env.GMAIL_PASS ? `설정됨 (길이: ${process.env.GMAIL_PASS.length})` : '설정안됨');
+    console.log('RECEIVER_EMAIL:', process.env.RECEIVER_EMAIL);
+    console.log('모든 환경 변수:', Object.keys(process.env).filter(key => key.includes('GMAIL') || key.includes('RECEIVER')));
+    
     // 환경 변수 검증
     if (!process.env.GMAIL_USER || !process.env.GMAIL_PASS) {
       console.error('Gmail 환경 변수가 설정되지 않았습니다.');
+      console.error('GMAIL_USER 존재:', !!process.env.GMAIL_USER);
+      console.error('GMAIL_PASS 존재:', !!process.env.GMAIL_PASS);
       return NextResponse.json(
         { 
           success: false, 

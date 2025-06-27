@@ -5,7 +5,6 @@ import Link from 'next/link';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    company: '',
     name: '',
     phone: '',
     email: '',
@@ -14,7 +13,6 @@ export default function Contact() {
     budget: '',
     period: '',
     description: '',
-    referenceMethod: '',
     agreePrivacy: false
   });
 
@@ -60,7 +58,6 @@ export default function Contact() {
         setSubmitMessage('문의가 성공적으로 전송되었습니다. 빠른 시일 내 연락드리겠습니다.');
         // 폼 초기화
         setFormData({
-          company: '',
           name: '',
           phone: '',
           email: '',
@@ -69,7 +66,6 @@ export default function Contact() {
           budget: '',
           period: '',
           description: '',
-          referenceMethod: '',
           agreePrivacy: false
         });
       } else {
@@ -148,24 +144,8 @@ export default function Contact() {
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                      회사명 *
-                    </label>
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      required
-                      value={formData.company}
-                      onChange={handleInputChange}
-                      className="w-full p-4 border border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-none transition-colors"
-                      placeholder="회사명을 입력해주세요"
-                      aria-describedby="company-error"
-                    />
-                  </div>
-                  <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      담당자명 *
+                      이름 *
                     </label>
                     <input
                       type="text"
@@ -175,7 +155,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleInputChange}
                       className="w-full p-4 border border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-none transition-colors"
-                      placeholder="담당자명을 입력해주세요"
+                      placeholder="이름을 입력해주세요"
                       aria-describedby="name-error"
                     />
                   </div>
@@ -195,7 +175,7 @@ export default function Contact() {
                       aria-describedby="phone-error"
                     />
                   </div>
-                  <div>
+                  <div className="md:col-span-2">
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                       이메일 *
                     </label>
@@ -220,13 +200,13 @@ export default function Contact() {
                   2. 프로젝트 정보
                 </h2>
 
-                {/* (1) 서비스 유형 */}
+                {/* 서비스 유형 */}
                 <fieldset className="mb-8">
                   <legend className="text-lg font-semibold text-black mb-4">
-                    (1) 서비스 유형을 선택해 주세요.
+                    서비스 유형을 선택해주세요
                   </legend>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {['기업사이트', '이커머스', '랜딩페이지', '마이크로사이트', '제품소개사이트', '브랜딩'].map((service) => (
+                    {['기업사이트', '이커머스', '랜딩페이지', '브랜딩', '제품소개사이트', '마이크로사이트'].map((service) => (
                       <label key={service} className="flex items-center space-x-3 cursor-pointer">
                         <input
                           type="checkbox"
@@ -241,10 +221,10 @@ export default function Contact() {
                   </div>
                 </fieldset>
 
-                {/* (2) 제작 유형 */}
+                {/* 제작 유형 */}
                 <div className="mb-8">
                   <h3 className="text-lg font-semibold text-black mb-4">
-                    (2) 제작 유형을 선택해 주세요.
+                    제작 유형을 선택해 주세요
                   </h3>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {['신규 구축', '리뉴얼 구축', '유지보수', '기타'].map((type) => (
@@ -262,50 +242,43 @@ export default function Contact() {
                   </div>
                 </div>
 
-                {/* (3) 제작 예산 & (4) 제작 기간 */}
+                {/* 제작 예산 & 제작 기간 */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                   <div>
                     <h3 className="text-lg font-semibold text-black mb-4">
-                      (3) 제작 예산
+                      제작예산
                     </h3>
-                    <select
+                    <input
+                      type="text"
                       name="budget"
                       value={formData.budget}
                       onChange={handleInputChange}
-                      className="w-full p-4 border border-gray-300 focus:border-black focus:outline-none bg-white text-gray-700 rounded-none"
-                    >
-                      <option value="">예산을 선택해 주세요.</option>
-                      <option value="1000만원 이상">1,000만원 이상</option>
-                      <option value="2000만원 이상">2,000만원 이상</option>
-                      <option value="5000만원 이상">5,000만원 이상</option>
-                      <option value="10000만원 이상">10,000만원 이상</option>
-                    </select>
+                      className="w-full p-4 border border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-none transition-colors"
+                      placeholder="예산을 입력해주세요"
+                    />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-black mb-4">
-                      (4) 제작 기간
+                      제작기간
                     </h3>
-                    <select
+                    <input
+                      type="text"
                       name="period"
                       value={formData.period}
                       onChange={handleInputChange}
-                      className="w-full p-4 border border-gray-300 focus:border-black focus:outline-none bg-white text-gray-700 rounded-none"
-                    >
-                      <option value="">기간을 선택해 주세요.</option>
-                      <option value="1~3개월">1~3개월</option>
-                      <option value="3~6개월">3~6개월</option>
-                      <option value="7~12개월">7~12개월</option>
-                    </select>
+                      className="w-full p-4 border border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-none transition-colors"
+                      placeholder="기간을 입력해주세요"
+                    />
                   </div>
                 </div>
 
-                {/* (5) 프로젝트 설명 */}
+                {/* 요구사항 */}
                 <div className="mb-8">
                   <h3 className="text-lg font-semibold text-black mb-4">
-                    (5) 프로젝트에 대해 설명해 주세요.
+                    요구사항
                   </h3>
                   <p className="text-sm text-gray-600 mb-4">
-                    프로젝트에 대한 내용을 자세히 작성해 주시면 더욱 정확한 회신이 가능합니다.
+                    제작시 저희가 알았으면하는걸 편하게 적어주세요.
                   </p>
                   <textarea
                     name="description"
@@ -313,49 +286,9 @@ export default function Contact() {
                     onChange={handleInputChange}
                     rows={8}
                     required
-                    placeholder="프로젝트 제목 :&#10;프로젝트 목적 :&#10;레퍼런스 사이트 :&#10;문의 내용 :"
+                    placeholder="요구사항을 자세히 작성해주세요."
                     className="w-full p-4 border border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-none resize-none transition-colors"
                   />
-                </div>
-
-                {/* (6) 첨부파일 */}
-                <div className="mb-8">
-                  <h3 className="text-lg font-semibold text-black mb-4">
-                    (6) 첨부파일을 등록해 주세요.
-                  </h3>
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-gray-400 transition-colors">
-                    <input type="file" multiple className="hidden" id="file-upload" />
-                    <label htmlFor="file-upload" className="cursor-pointer">
-                      <div className="text-gray-500">
-                        <svg className="w-12 h-12 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                        </svg>
-                        <p className="text-lg font-medium">파일을 드래그하거나 클릭하여 업로드</p>
-                        <p className="text-sm text-gray-400 mt-2">최대 10MB, PDF, JPG, PNG, DOC 파일</p>
-                      </div>
-                    </label>
-                  </div>
-                </div>
-
-                {/* (7) 알게 된 경로 */}
-                <div className="mb-8">
-                  <h3 className="text-lg font-semibold text-black mb-4">
-                    (7) VORO를 알게 된 경로를 선택해 주세요
-                  </h3>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {['기존 고객사', '지인 소개', '구글', '네이버', '네이버 블로그', '인스타그램', '기타'].map((method) => (
-                      <label key={method} className="flex items-center space-x-3 cursor-pointer">
-                        <input
-                          type="radio"
-                          name="referenceMethod"
-                          value={method}
-                          onChange={handleInputChange}
-                          className="w-4 h-4 text-black border-gray-300 focus:ring-black"
-                        />
-                        <span className="text-gray-700">{method}</span>
-                      </label>
-                    ))}
-                  </div>
                 </div>
               </section>
 

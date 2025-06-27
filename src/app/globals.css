@@ -66,6 +66,316 @@ h1, h2, h3, h4, h5, h6, p, span {
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  cursor: default;
+  outline: none;
+  border: none;
+  caret-color: transparent;
+}
+
+/* 포커스 및 아웃라인 제거 */
+*:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* 텍스트 커서 제거 */
+div, span, p, h1, h2, h3, h4, h5, h6 {
+  caret-color: transparent !important;
+  outline: none !important;
+}
+
+/* 모든 가상 요소의 커서 및 아웃라인 제거 */
+*::before, *::after {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+}
+
+/* 전체 요소에 대한 강력한 커서 제거 */
+* {
+  caret-color: transparent !important;
+  outline: none !important;
+}
+
+/* 극강의 세로줄 완전 제거 - 모든 상태 */
+*, *:hover, *:focus, *:active, *:visited {
+  caret-color: transparent !important;
+  outline: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  -webkit-text-stroke: 0 !important;
+  text-stroke: 0 !important;
+}
+
+/* contentEditable 요소 커서 제거 */
+[contenteditable] {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+}
+
+/* 텍스트 선택 시 커서 제거 */
+::selection {
+  background: transparent !important;
+}
+
+::-moz-selection {
+  background: transparent !important;
+}
+
+/* 강력한 커서 및 세로줄 제거 */
+body * {
+  caret-color: transparent !important;
+  outline: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+}
+
+/* 가상 요소 세로줄 제거 */
+*::after, *::before {
+  content: none !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* 텍스트 관련 요소 강력 제거 */
+h1, h2, h3, h4, h5, h6, p, span, div {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* 홈 섹션 전체에 대한 강력한 제거 */
+#home * {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background-image: none !important;
+}
+
+/* 애니메이션 중 나타날 수 있는 효과 제거 */
+.animate-fade-in-up * {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+}
+
+/* 그라데이션 텍스트 관련 */
+.bg-clip-text {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 모든 가능한 세로줄 제거 - 최종 솔루션 */
+* {
+  caret-color: transparent !important;
+  outline: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+*:focus {
+  caret-color: transparent !important;
+  outline: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+*:active {
+  caret-color: transparent !important;
+  outline: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 텍스트 입력 및 편집 완전 차단 */
+input, textarea, [contenteditable] {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+}
+
+/* 모든 가상 요소 제거 */
+*::before, *::after {
+  display: none !important;
+  content: '' !important;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* 특정 브라우저 세로줄 제거 */
+::-webkit-input-placeholder { caret-color: transparent !important; }
+::-moz-placeholder { caret-color: transparent !important; }
+:-ms-input-placeholder { caret-color: transparent !important; }
+:-moz-placeholder { caret-color: transparent !important; }
+
+/* 커스텀 클래스로 강력한 세로줄 제거 */
+.no-cursor {
+  caret-color: transparent !important;
+  cursor: default !important;
+}
+
+.no-outline {
+  outline: none !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+}
+
+.no-border {
+  border: none !important;
+  border-width: 0 !important;
+  border-style: none !important;
+  border-color: transparent !important;
+  border-right: none !important;
+  border-left: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+/* 버튼 및 링크 요소 세로줄 제거 */
+a, button {
+  caret-color: transparent !important;
+  outline: none !important;
+  border-right: none !important;
+  text-decoration: none !important;
+}
+
+a:hover, button:hover {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+  border-right: none !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background-image: none !important;
+}
+
+/* 모든 요소의 호버 상태에서 세로줄 완전 제거 */
+*:hover {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background-image: none !important;
+}
+
+/* 특별히 텍스트 요소들의 호버 상태 */
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover, 
+p:hover, span:hover, div:hover {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background-image: none !important;
+  cursor: default !important;
+}
+
+/* Contact us 버튼 및 모든 링크 버튼 호버 상태 특별 처리 */
+a:hover, a:hover *, a:focus, a:focus *, a:active, a:active * {
+  caret-color: transparent !important;
+  outline: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background-image: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+/* 버튼 요소들의 모든 상태에서 세로줄 제거 */
+button:hover, button:hover *, button:focus, button:focus *, button:active, button:active * {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background-image: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+/* 특별히 홈 섹션의 Contact us 버튼 */
+#home a:hover, #home a:hover *, #home a:focus, #home a:focus *, #home a:active, #home a:active * {
+  caret-color: transparent !important;
+  outline: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  background-image: none !important;
+  -webkit-text-stroke: none !important;
+}
+
+/* SVG 아이콘도 포함 */
+svg:hover {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+a:focus, button:focus {
+  caret-color: transparent !important;
+  outline: none !important;
+  border-right: none !important;
+  text-decoration: none !important;
+}
+
+a:active, button:active {
+  caret-color: transparent !important;
+  outline: none !important;
+  border-right: none !important;
+  text-decoration: none !important;
+}
+
+/* SVG 요소 세로줄 제거 */
+svg {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+svg:hover {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 /* 웹킷 기반 브라우저용 스크롤바 스타일 */
@@ -159,6 +469,127 @@ h1, h2, h3, h4, h5, h6, p, span {
   }
 }
 
+/* VORO 로고 자연스러운 움직임 애니메이션 */
+@keyframes voro-float-home {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+  }
+  25% {
+    transform: translateY(-3px) translateX(1px) scale(1.005);
+  }
+  50% {
+    transform: translateY(-8px) translateX(0px) scale(1.01);
+  }
+  75% {
+    transform: translateY(-3px) translateX(-1px) scale(1.005);
+  }
+}
+
+@keyframes voro-float-services {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+  }
+  20% {
+    transform: translateY(-5px) translateX(2px) scale(1.01);
+  }
+  40% {
+    transform: translateY(-12px) translateX(-1px) scale(1.02);
+  }
+  60% {
+    transform: translateY(-8px) translateX(-3px) scale(1.015);
+  }
+  80% {
+    transform: translateY(-3px) translateX(1px) scale(1.008);
+  }
+}
+
+@keyframes voro-float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+  }
+  20% {
+    transform: translateY(-5px) translateX(2px) scale(1.01);
+  }
+  40% {
+    transform: translateY(-12px) translateX(-1px) scale(1.02);
+  }
+  60% {
+    transform: translateY(-8px) translateX(-3px) scale(1.01);
+  }
+  80% {
+    transform: translateY(-3px) translateX(1px) scale(1.005);
+  }
+}
+
+@keyframes voro-pulse {
+  0%, 100% {
+    opacity: 0.15;
+    filter: blur(0px) brightness(1);
+  }
+  20% {
+    opacity: 0.18;
+    filter: blur(0.1px) brightness(1.05);
+  }
+  40% {
+    opacity: 0.20;
+    filter: blur(0.2px) brightness(1.1);
+  }
+  60% {
+    opacity: 0.17;
+    filter: blur(0.1px) brightness(1.03);
+  }
+  80% {
+    opacity: 0.14;
+    filter: blur(0px) brightness(0.98);
+  }
+}
+
+@keyframes voro-pulse-slow {
+  0%, 100% {
+    opacity: 0.05;
+    filter: blur(0px) brightness(1);
+  }
+  25% {
+    opacity: 0.08;
+    filter: blur(0.1px) brightness(1.1);
+  }
+  50% {
+    opacity: 0.10;
+    filter: blur(0.2px) brightness(1.2);
+  }
+  75% {
+    opacity: 0.07;
+    filter: blur(0.1px) brightness(1.05);
+  }
+}
+
+@keyframes voro-glow {
+  0%, 100% {
+    text-shadow: 
+      0 0 10px rgba(255, 255, 255, 0.08),
+      0 0 20px rgba(255, 255, 255, 0.06),
+      0 0 30px rgba(255, 255, 255, 0.04);
+  }
+  25% {
+    text-shadow: 
+      0 0 15px rgba(255, 255, 255, 0.12),
+      0 0 30px rgba(255, 255, 255, 0.08),
+      0 0 45px rgba(255, 255, 255, 0.06);
+  }
+  50% {
+    text-shadow: 
+      0 0 20px rgba(255, 255, 255, 0.15),
+      0 0 40px rgba(255, 255, 255, 0.10),
+      0 0 60px rgba(255, 255, 255, 0.08);
+  }
+  75% {
+    text-shadow: 
+      0 0 15px rgba(255, 255, 255, 0.12),
+      0 0 30px rgba(255, 255, 255, 0.08),
+      0 0 45px rgba(255, 255, 255, 0.06);
+  }
+}
+
 @keyframes float-particle {
   0%, 100% {
     transform: translateY(0px) translateX(0px);
@@ -218,6 +649,34 @@ h1, h2, h3, h4, h5, h6, p, span {
   }
 }
 
+/* 홈화면 배경 스크롤 애니메이션 */
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(120%);
+  }
+  100% {
+    transform: translateX(-120%);
+  }
+}
+
+@keyframes scroll-right-slow {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
 .animate-gradient-shift {
   animation: gradient-shift 8s ease-in-out infinite;
 }
@@ -254,6 +713,55 @@ h1, h2, h3, h4, h5, h6, p, span {
   animation: voro-slide-down 8s ease-out infinite;
 }
 
+.animate-scroll-right {
+  animation: scroll-right 60s linear infinite;
+}
+
+.animate-scroll-left {
+  animation: scroll-left 65s linear infinite;
+}
+
+.animate-scroll-right-slow {
+  animation: scroll-right-slow 70s linear infinite;
+}
+
+/* 홈 배경 스크롤 텍스트 커서 완전 제거 */
+.animate-scroll-right, 
+.animate-scroll-left, 
+.animate-scroll-right-slow {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  pointer-events: none !important;
+  cursor: default !important;
+  -webkit-touch-callout: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.animate-scroll-right *, 
+.animate-scroll-left *, 
+.animate-scroll-right-slow * {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  pointer-events: none !important;
+  cursor: default !important;
+  -webkit-touch-callout: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
 /* Fade in 애니메이션 */
 @keyframes fade-in {
   0% {
@@ -268,6 +776,49 @@ h1, h2, h3, h4, h5, h6, p, span {
 
 .animate-fade-in {
   animation: fade-in 1s ease-out forwards;
+}
+
+/* 홈화면 텍스트 애니메이션 */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out forwards;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+.delay-1000 {
+  animation-delay: 1s;
+}
+
+/* 그라데이션 텍스트 애니메이션 */
+@keyframes gradient-shift-text {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift-text 3s ease-in-out infinite;
 }
 
 /* 새로운 시작 애니메이션 */
@@ -450,6 +1001,36 @@ h1, h2, h3, h4, h5, h6, p, span {
   background: #555;
 }
 
+/* 모바일에서 VORO 애니메이션 최적화 */
+@media (max-width: 768px) {
+  @keyframes voro-float {
+    0%, 100% {
+      transform: translateY(0px) translateX(0px) scale(1);
+    }
+    50% {
+      transform: translateY(-5px) translateX(0px) scale(1.005);
+    }
+  }
+  
+  @keyframes voro-pulse {
+    0%, 100% {
+      opacity: 0.20;
+    }
+    50% {
+      opacity: 0.25;
+    }
+  }
+  
+  @keyframes voro-glow {
+    0%, 100% {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+    50% {
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+    }
+  }
+}
+
 /* 접근성 개선 */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -470,4 +1051,352 @@ h1, h2, h3, h4, h5, h6, p, span {
   .text-gray-300 {
     color: #999 !important;
   }
+}
+
+/* 최종 해결책 - Contact us 버튼 세로줄 완전 제거 */
+.group[onclick*="contact"], .group[onclick*="contact"]:hover, .group[onclick*="contact"]:focus, .group[onclick*="contact"]:active,
+a[href="/contact"], a[href="/contact"]:hover, a[href="/contact"]:focus, a[href="/contact"]:active {
+  caret-color: transparent !important;
+  outline: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-top: 2px solid white !important;
+  border-bottom: 2px solid white !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  -webkit-text-stroke: 0 !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+}
+
+.group[onclick*="contact"] *, .group[onclick*="contact"]:hover *, .group[onclick*="contact"]:focus *, .group[onclick*="contact"]:active *,
+a[href="/contact"] *, a[href="/contact"]:hover *, a[href="/contact"]:focus *, a[href="/contact"]:active * {
+  caret-color: transparent !important;
+  outline: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  -webkit-text-stroke: 0 !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  pointer-events: none !important;
+}
+
+/* 브라우저별 특수 처리 */
+@-moz-document url-prefix() {
+  a[href="/contact"], a[href="/contact"]:hover {
+    -moz-appearance: none !important;
+    caret-color: transparent !important;
+    outline: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+  }
+}
+
+/* 웹킷 브라우저 특수 처리 */
+@supports (-webkit-appearance: none) {
+  a[href="/contact"], a[href="/contact"]:hover {
+    -webkit-appearance: none !important;
+    caret-color: transparent !important;
+    outline: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    -webkit-text-stroke: 0 !important;
+  }
+}
+
+/* 강제 오버라이드 */
+html a[href="/contact"], 
+html a[href="/contact"]:hover, 
+html a[href="/contact"]:focus, 
+html a[href="/contact"]:active {
+  caret-color: transparent !important;
+  outline: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* 궁극의 해결책 - 모든 div, button, span 요소 세로줄 완전 차단 */
+div, div:hover, div:focus, div:active,
+button, button:hover, button:focus, button:active,
+span, span:hover, span:focus, span:active {
+  caret-color: transparent !important;
+  outline: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-text-stroke: none !important;
+  -webkit-text-fill-color: unset !important;
+  background-image: none !important;
+  text-decoration: none !important;
+  cursor: default !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+}
+
+/* 특별히 클릭 가능한 div 요소들 */
+div[onclick], div[onclick]:hover, div[onclick]:focus, div[onclick]:active {
+  caret-color: transparent !important;
+  outline: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-text-stroke: none !important;
+  cursor: pointer !important;
+}
+
+/* 홈 섹션의 모든 요소 */
+#home div, #home div:hover, #home div:focus, #home div:active,
+#home span, #home span:hover, #home span:focus, #home span:active,
+#home svg, #home svg:hover, #home svg:focus, #home svg:active {
+  caret-color: transparent !important;
+  outline: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-text-stroke: none !important;
+}
+
+/* 강제 글로벌 오버라이드 */
+body div, body div:hover, body span, body span:hover, body svg, body svg:hover {
+  caret-color: transparent !important;
+  outline: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* 궁극의 해결책 - 브라우저의 텍스트 선택 모드 완전 차단 */
+*, *::before, *::after {
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -khtml-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  cursor: default !important;
+}
+
+/* 특별히 클릭 가능한 요소들은 pointer cursor */
+div[onclick], a, button, [role="button"] {
+  cursor: pointer !important;
+}
+
+/* 텍스트 선택이 필요한 요소들만 예외 */
+input, textarea, [contenteditable="true"] {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+  cursor: text !important;
+}
+
+/* Chrome의 고유한 텍스트 선택 문제 해결 */
+body {
+  -webkit-user-select: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* 모든 가능한 브라우저 커서 문제 해결 */
+:not(input):not(textarea):not([contenteditable="true"]) {
+  cursor: default !important;
+  caret-color: transparent !important;
+}
+
+/* Contact 버튼의 텍스트 선택 완전 차단 */
+div[onclick*="contact"], div[onclick*="contact"] * {
+  cursor: pointer !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+  text-shadow: none !important;
+}
+
+/* 극강 세로줄 완전 제거 - 최우선순위 */
+html *, html *:hover, html *:focus, html *:active, html *:visited {
+  caret-color: transparent !important;
+  outline: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-text-stroke: 0 !important;
+  -webkit-text-fill-color: inherit !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  cursor: default !important;
+}
+
+/* 클릭 가능한 요소만 pointer cursor */
+html div[onclick], html a, html button, html [role="button"] {
+  cursor: pointer !important;
+}
+
+/* 텍스트 입력 필드만 예외 */
+html input, html textarea, html [contenteditable="true"] {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+  cursor: text !important;
+  caret-color: auto !important;
+}
+
+/* Contact 버튼 전용 세로줄 완전 제거 */
+.contact-button, .contact-button *, 
+.contact-button:hover, .contact-button:hover *,
+.contact-button:focus, .contact-button:focus *,
+.contact-button:active, .contact-button:active * {
+  caret-color: transparent !important;
+  outline: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: 2px solid white !important;
+  border-bottom: 2px solid white !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-text-stroke: none !important;
+  -webkit-text-fill-color: inherit !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  cursor: pointer !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  background-image: none !important;
+  text-decoration: none !important;
+}
+
+/* Contact 버튼의 span과 svg 요소 */
+.contact-button span, .contact-button svg, .contact-button path {
+  caret-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  pointer-events: none !important;
+}
+
+/* 브라우저별 강제 오버라이드 */
+body .contact-button,
+body .contact-button *,
+html .contact-button,
+html .contact-button * {
+  caret-color: transparent !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  user-select: none !important;
+  outline: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .contact-button, .contact-button * {
+    -webkit-user-select: none !important;
+    -webkit-touch-callout: none !important;
+    caret-color: transparent !important;
+  }
+}
+
+/* 서비스 소개 섹션 세로줄 완전 제거 */
+#services, #services *, 
+#services a, #services a *, 
+#services button, #services button *,
+#services div, #services div *,
+#services span, #services span *,
+#services svg, #services svg * {
+  caret-color: transparent !important;
+  outline: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-text-stroke: none !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  text-decoration: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Contact 버튼 전용 강화 */
+a[href="/contact"], a[href="/contact"] *,
+.contact-button, .contact-button *,
+.contact-button:hover, .contact-button:hover *,
+.contact-button:focus, .contact-button:focus *,
+.contact-button:active, .contact-button:active * {
+  caret-color: transparent !important;
+  outline: 0 !important;
+  border: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-text-stroke: 0 !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+  text-decoration: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+/* 모든 상태에서 세로줄 제거 */
+*:hover, *:focus, *:active, *:visited {
+  caret-color: transparent !important;
+  outline: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  text-shadow: none !important;
 }

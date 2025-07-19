@@ -127,7 +127,6 @@ export default function Contact() {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-3 bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-4 rounded-lg font-bold text-lg transition-colors cursor-pointer"
-                style={{ pointerEvents: 'auto' }}
               >
                 <span>💬</span>
                 카카오톡 상담하기
@@ -135,10 +134,9 @@ export default function Contact() {
               <a 
                 href="tel:010-5344-9868"
                 className="flex items-center justify-center gap-3 bg-black hover:bg-gray-800 text-white px-6 py-4 rounded-lg font-bold text-lg transition-colors cursor-pointer"
-                style={{ pointerEvents: 'auto' }}
               >
                 <span>📞</span>
-                전화 상담하기 (010-5344-9868)
+                전화 상담하기
               </a>
             </div>
             
@@ -149,7 +147,7 @@ export default function Contact() {
           </div>
 
           {/* Contact Form */}
-          <form onSubmit={handleSubmit} className="space-y-8">
+          <div className="space-y-8">
             {/* 기본정보 */}
             <div className="bg-gray-50 p-8 rounded-xl">
               <h2 className="text-2xl font-bold text-black mb-6">📝 기본정보</h2>
@@ -167,7 +165,7 @@ export default function Contact() {
                     onChange={handleInputChange}
                     className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                     placeholder="홍길동"
-                    style={{ pointerEvents: 'auto' }}
+                    autoComplete="name"
                   />
                 </div>
                 <div>
@@ -182,7 +180,7 @@ export default function Contact() {
                     onChange={handleInputChange}
                     className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                     placeholder="(주)회사명 (선택)"
-                    style={{ pointerEvents: 'auto' }}
+                    autoComplete="organization"
                   />
                 </div>
                 <div>
@@ -198,7 +196,7 @@ export default function Contact() {
                     onChange={handleInputChange}
                     className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                     placeholder="010-1234-5678"
-                    style={{ pointerEvents: 'auto' }}
+                    autoComplete="tel"
                   />
                 </div>
                 <div>
@@ -214,7 +212,7 @@ export default function Contact() {
                     onChange={handleInputChange}
                     className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                     placeholder="example@company.com"
-                    style={{ pointerEvents: 'auto' }}
+                    autoComplete="email"
                   />
                 </div>
               </div>
@@ -226,13 +224,13 @@ export default function Contact() {
 
               {/* 서비스 유형 */}
               <div className="mb-8">
-                <h3 className="text-lg font-bold text-black mb-4">서비스 유형</h3>
+                <label htmlFor="serviceType" className="block text-lg font-bold text-black mb-4">서비스 유형</label>
                 <select
+                  id="serviceType"
                   name="serviceType"
                   value={formData.serviceType}
                   onChange={handleInputChange}
                   className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
-                  style={{ pointerEvents: 'auto' }}
                 >
                   <option value="">선택해주세요</option>
                   <option value="홈페이지 제작">홈페이지 제작 (회사소개, 제품소개)</option>
@@ -247,13 +245,13 @@ export default function Contact() {
               {/* 제작 유형 & 예산 */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <div>
-                  <h3 className="text-lg font-bold text-black mb-4">제작 유형</h3>
+                  <label htmlFor="projectType" className="block text-lg font-bold text-black mb-4">제작 유형</label>
                   <select
+                    id="projectType"
                     name="projectType"
                     value={formData.projectType}
                     onChange={handleInputChange}
                     className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
-                    style={{ pointerEvents: 'auto' }}
                   >
                     <option value="">선택해주세요</option>
                     <option value="새로 만들기">새로 만들기</option>
@@ -263,13 +261,13 @@ export default function Contact() {
                   </select>
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-black mb-4">예상 예산</h3>
+                  <label htmlFor="budget" className="block text-lg font-bold text-black mb-4">예상 예산</label>
                   <select
+                    id="budget"
                     name="budget"
                     value={formData.budget}
                     onChange={handleInputChange}
                     className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
-                    style={{ pointerEvents: 'auto' }}
                   >
                     <option value="">선택해주세요</option>
                     <option value="100만원 이하">100만원 이하</option>
@@ -283,13 +281,13 @@ export default function Contact() {
 
               {/* 기간 */}
               <div className="mb-8">
-                <h3 className="text-lg font-bold text-black mb-4">언제까지 필요하신가요?</h3>
+                <label htmlFor="period" className="block text-lg font-bold text-black mb-4">언제까지 필요하신가요?</label>
                 <select
+                  id="period"
                   name="period"
                   value={formData.period}
                   onChange={handleInputChange}
                   className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
-                  style={{ pointerEvents: 'auto' }}
                 >
                   <option value="">선택해주세요</option>
                   <option value="1개월 이내">1개월 이내</option>
@@ -301,18 +299,18 @@ export default function Contact() {
 
               {/* 상세 설명 */}
               <div>
-                <h3 className="text-lg font-bold text-black mb-4">💡 어떤 사이트를 원하시나요?</h3>
+                <label htmlFor="description" className="block text-lg font-bold text-black mb-4">💡 어떤 사이트를 원하시나요?</label>
                 <p className="text-sm text-gray-600 mb-4">
                   예) "카페 홈페이지인데 메뉴소개랑 매장위치가 나왔으면 좋겠어요", "쇼핑몰인데 결제기능이 필요해요" 등 편하게 적어주세요.
                 </p>
                 <textarea
+                  id="description"
                   name="description"
                   value={formData.description}
                   onChange={handleInputChange}
                   rows={6}
                   placeholder="원하시는 기능이나 참고할 사이트, 궁금한 점 등을 자유롭게 적어주세요."
                   className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg resize-none transition-colors"
-                  style={{ pointerEvents: 'auto' }}
                 />
               </div>
             </div>
@@ -327,14 +325,13 @@ export default function Contact() {
                 <p><strong>문의:</strong> voro2520@gmail.com / 010-5344-9868</p>
               </div>
 
-              <label className="flex items-center space-x-3 cursor-pointer" style={{ pointerEvents: 'auto' }}>
+              <label className="flex items-center space-x-3 cursor-pointer">
                 <input
                   type="checkbox"
                   name="agreePrivacy"
                   checked={formData.agreePrivacy}
                   onChange={handleInputChange}
                   className="w-5 h-5 text-black border-gray-300 rounded focus:ring-black"
-                  style={{ pointerEvents: 'auto' }}
                 />
                 <span className="text-gray-700 font-medium">
                   개인정보 수집 및 이용에 동의합니다. *
@@ -355,7 +352,6 @@ export default function Contact() {
                     <a 
                       href="tel:010-5344-9868"
                       className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-lg font-bold hover:bg-gray-800 transition-colors"
-                      style={{ pointerEvents: 'auto' }}
                     >
                       📞 010-5344-9868로 전화하기
                     </a>
@@ -367,10 +363,10 @@ export default function Contact() {
             {/* Submit Button */}
             <div className="text-center">
               <button
-                type="submit"
+                type="button"
+                onClick={handleSubmit}
                 disabled={isSubmitting}
                 className="bg-black hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-16 py-5 text-xl font-bold rounded-xl transition-colors shadow-lg cursor-pointer"
-                style={{ pointerEvents: 'auto' }}
               >
                 {isSubmitting ? '전송 중...' : '🚀 문의하기'}
               </button>
@@ -378,7 +374,7 @@ export default function Contact() {
                 급하시면 <strong>카카오톡</strong>이나 <strong>전화</strong>로 연락주세요!
               </p>
             </div>
-          </form>
+          </div>
         </div>
       </main>
 

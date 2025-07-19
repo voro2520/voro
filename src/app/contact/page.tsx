@@ -6,6 +6,7 @@ import Link from 'next/link';
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
+    company: '',
     phone: '',
     email: '',
     serviceTypes: [] as string[],
@@ -59,6 +60,7 @@ export default function Contact() {
         // 폼 초기화
         setFormData({
           name: '',
+          company: '',
           phone: '',
           email: '',
           serviceTypes: [],
@@ -73,7 +75,7 @@ export default function Contact() {
       }
     } catch (error) {
       console.error('Form submission error:', error);
-      setSubmitMessage('문의 전송 중 오류가 발생했습니다. 다시 시도해주세요.');
+      setSubmitMessage('문의 전송 중 오류가 발생했습니다. 아래 연락처로 직접 문의해주세요.');
     } finally {
       setIsSubmitting(false);
     }
@@ -129,22 +131,47 @@ export default function Contact() {
             {/* Page Title */}
             <header className="text-center mb-16">
               <h1 className="text-4xl md:text-6xl font-black text-black mb-4">CONTACT</h1>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                프로젝트에 대한 상세한 정보를 알려주시면<br />
-                최적의 솔루션과 견적을 제안해드리겠습니다.
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                빠르고 간편한 상담을 원하신다면<br />
+                <strong>카카오톡이나 전화</strong>로 연락해주세요!
               </p>
+              
+              {/* 빠른 연락 방법 */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto mb-12">
+                <a 
+                  href="http://pf.kakao.com/_tExfLG" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-3 bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-4 rounded-lg font-bold text-lg transition-colors"
+                >
+                  <span>💬</span>
+                  카카오톡 상담하기
+                </a>
+                <a 
+                  href="tel:010-5344-9868"
+                  className="flex items-center justify-center gap-3 bg-black hover:bg-gray-800 text-white px-6 py-4 rounded-lg font-bold text-lg transition-colors"
+                >
+                  <span>📞</span>
+                  전화 상담하기
+                </a>
+              </div>
+              
+              <div className="text-center text-gray-500 mb-8">
+                <p>또는 아래 폼을 작성해주세요</p>
+                <div className="w-16 h-px bg-gray-300 mx-auto mt-4"></div>
+              </div>
             </header>
 
             {/* Contact Form */}
-            <form onSubmit={handleSubmit} className="space-y-12" noValidate>
+            <form onSubmit={handleSubmit} className="space-y-8" noValidate>
               {/* 1. 기본정보 */}
-              <section>
-                <h2 className="text-2xl font-bold text-black mb-8 pb-4 border-b-2 border-black">
-                  1. 기본정보
+              <section className="bg-gray-50 p-8 rounded-xl">
+                <h2 className="text-2xl font-bold text-black mb-6">
+                  📝 기본정보
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="name" className="block text-sm font-bold text-gray-800 mb-2">
                       이름 *
                     </label>
                     <input
@@ -154,13 +181,26 @@ export default function Contact() {
                       required
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full p-4 border border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-none transition-colors"
-                      placeholder="이름을 입력해주세요"
-                      aria-describedby="name-error"
+                      className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
+                      placeholder="홍길동"
                     />
                   </div>
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="company" className="block text-sm font-bold text-gray-800 mb-2">
+                      회사명
+                    </label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
+                      placeholder="(주)회사명 (선택)"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-bold text-gray-800 mb-2">
                       연락처 *
                     </label>
                     <input
@@ -170,13 +210,12 @@ export default function Contact() {
                       required
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full p-4 border border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-none transition-colors"
-                      placeholder="010-0000-0000"
-                      aria-describedby="phone-error"
+                      className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
+                      placeholder="010-1234-5678"
                     />
                   </div>
-                  <div className="md:col-span-2">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-bold text-gray-800 mb-2">
                       이메일 *
                     </label>
                     <input
@@ -186,148 +225,175 @@ export default function Contact() {
                       required
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full p-4 border border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-none transition-colors"
+                      className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                       placeholder="example@company.com"
-                      aria-describedby="email-error"
                     />
                   </div>
                 </div>
               </section>
 
               {/* 2. 프로젝트 정보 */}
-              <section>
-                <h2 className="text-2xl font-bold text-black mb-8 pb-4 border-b-2 border-black">
-                  2. 프로젝트 정보
+              <section className="bg-white border-2 border-gray-200 p-8 rounded-xl">
+                <h2 className="text-2xl font-bold text-black mb-6">
+                  🚀 어떤 서비스가 필요하신가요?
                 </h2>
 
                 {/* 서비스 유형 */}
-                <fieldset className="mb-8">
-                  <legend className="text-lg font-semibold text-black mb-4">
-                    서비스 유형을 선택해주세요
-                  </legend>
+                <div className="mb-8">
+                  <h3 className="text-lg font-bold text-black mb-4">
+                    서비스 유형 (복수 선택 가능)
+                  </h3>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {['기업사이트', '이커머스', '랜딩페이지', '브랜딩', '제품소개사이트', '마이크로사이트'].map((service) => (
-                      <label key={service} className="flex items-center space-x-3 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          name="serviceTypes"
-                          value={service}
-                          onChange={handleInputChange}
-                          className="w-4 h-4 text-black border-gray-300 rounded focus:ring-black"
-                        />
-                        <span className="text-gray-700">{service}</span>
+                    {[
+                      { name: '홈페이지 제작', desc: '회사소개, 제품소개' },
+                      { name: '쇼핑몰 제작', desc: '온라인 판매' },
+                      { name: '랜딩페이지', desc: '이벤트, 프로모션' },
+                      { name: '브랜딩', desc: '로고, 디자인' },
+                      { name: '앱 개발', desc: '모바일 앱' },
+                      { name: '기타', desc: '직접 상담' }
+                    ].map((service) => (
+                      <label key={service.name} className="flex flex-col border-2 border-gray-200 hover:border-black rounded-lg p-4 cursor-pointer transition-colors">
+                        <div className="flex items-center mb-2">
+                          <input
+                            type="checkbox"
+                            name="serviceTypes"
+                            value={service.name}
+                            onChange={handleInputChange}
+                            className="w-4 h-4 text-black border-gray-300 rounded focus:ring-black mr-3"
+                          />
+                          <span className="font-bold text-gray-800">{service.name}</span>
+                        </div>
+                        <span className="text-sm text-gray-600">{service.desc}</span>
                       </label>
                     ))}
                   </div>
-                </fieldset>
+                </div>
 
-                {/* 제작 유형 */}
+                {/* 제작 유형 & 예산 */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                  <div>
+                    <h3 className="text-lg font-bold text-black mb-4">
+                      제작 유형
+                    </h3>
+                    <div className="space-y-3">
+                      {['새로 만들기', '기존 사이트 리뉴얼', '유지보수', '잘 모르겠어요'].map((type) => (
+                        <label key={type} className="flex items-center space-x-3 cursor-pointer p-3 border rounded-lg hover:bg-gray-50">
+                          <input
+                            type="radio"
+                            name="projectType"
+                            value={type}
+                            onChange={handleInputChange}
+                            className="w-4 h-4 text-black border-gray-300 focus:ring-black"
+                          />
+                          <span className="text-gray-700 font-medium">{type}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-black mb-4">
+                      예상 예산
+                    </h3>
+                    <div className="space-y-3">
+                      {['100만원 이하', '100-300만원', '300-500만원', '500만원 이상', '상담 후 결정'].map((budget) => (
+                        <label key={budget} className="flex items-center space-x-3 cursor-pointer p-3 border rounded-lg hover:bg-gray-50">
+                          <input
+                            type="radio"
+                            name="budget"
+                            value={budget}
+                            onChange={handleInputChange}
+                            className="w-4 h-4 text-black border-gray-300 focus:ring-black"
+                          />
+                          <span className="text-gray-700 font-medium">{budget}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* 기간 */}
                 <div className="mb-8">
-                  <h3 className="text-lg font-semibold text-black mb-4">
-                    제작 유형을 선택해 주세요
+                  <h3 className="text-lg font-bold text-black mb-4">
+                    언제까지 필요하신가요?
                   </h3>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {['신규 구축', '리뉴얼 구축', '유지보수', '기타'].map((type) => (
-                      <label key={type} className="flex items-center space-x-3 cursor-pointer">
+                    {['1개월 이내', '2-3개월', '3-6개월', '상관없음'].map((period) => (
+                      <label key={period} className="flex items-center space-x-3 cursor-pointer p-3 border rounded-lg hover:bg-gray-50">
                         <input
                           type="radio"
-                          name="projectType"
-                          value={type}
+                          name="period"
+                          value={period}
                           onChange={handleInputChange}
                           className="w-4 h-4 text-black border-gray-300 focus:ring-black"
                         />
-                        <span className="text-gray-700">{type}</span>
+                        <span className="text-gray-700 font-medium">{period}</span>
                       </label>
                     ))}
                   </div>
                 </div>
 
-                {/* 제작 예산 & 제작 기간 */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                  <div>
-                    <h3 className="text-lg font-semibold text-black mb-4">
-                      제작예산
-                    </h3>
-                    <input
-                      type="text"
-                      name="budget"
-                      value={formData.budget}
-                      onChange={handleInputChange}
-                      className="w-full p-4 border border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-none transition-colors"
-                      placeholder="예산을 입력해주세요"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-black mb-4">
-                      제작기간
-                    </h3>
-                    <input
-                      type="text"
-                      name="period"
-                      value={formData.period}
-                      onChange={handleInputChange}
-                      className="w-full p-4 border border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-none transition-colors"
-                      placeholder="기간을 입력해주세요"
-                    />
-                  </div>
-                </div>
-
-                {/* 요구사항 */}
-                <div className="mb-8">
-                  <h3 className="text-lg font-semibold text-black mb-4">
-                    요구사항
+                {/* 상세 설명 */}
+                <div>
+                  <h3 className="text-lg font-bold text-black mb-4">
+                    💡 어떤 사이트를 원하시나요?
                   </h3>
                   <p className="text-sm text-gray-600 mb-4">
-                    제작시 저희가 알았으면하는걸 편하게 적어주세요.
+                    예) "카페 홈페이지인데 메뉴소개랑 매장위치가 나왔으면 좋겠어요", "쇼핑몰인데 결제기능이 필요해요" 등 편하게 적어주세요.
                   </p>
                   <textarea
                     name="description"
                     value={formData.description}
                     onChange={handleInputChange}
-                    rows={8}
-                    required
-                    placeholder="요구사항을 자세히 작성해주세요."
-                    className="w-full p-4 border border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-none resize-none transition-colors"
+                    rows={6}
+                    placeholder="원하시는 기능이나 참고할 사이트, 궁금한 점 등을 자유롭게 적어주세요."
+                    className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg resize-none transition-colors"
                   />
                 </div>
               </section>
 
               {/* 개인정보처리방침 */}
-              <section className="border-t-2 border-gray-200 pt-8">
-                <div className="bg-gray-50 p-6 mb-6">
-                  <h3 className="text-lg font-semibold text-black mb-4">개인정보처리방침</h3>
-                  <div className="text-sm text-gray-600 space-y-2 max-h-32 overflow-y-auto">
-                    <p>VORO는 귀하의 개인정보보호를 매우 중요시하며, 『개인정보보호법』을 준수하고 있습니다.</p>
-                    <p><strong>수집하는 개인정보:</strong> 이름, 전화번호, 이메일, 회사명</p>
-                    <p><strong>수집 목적:</strong> 프로젝트 상담 및 견적 제공</p>
-                    <p><strong>보유 기간:</strong> 상담 완료 후 1년간 보관 후 삭제</p>
-                    <p><strong>문의:</strong> voro2520@gmail.com / 010-5344-9868</p>
-                  </div>
+              <section className="bg-gray-50 p-6 rounded-xl">
+                <h3 className="text-lg font-bold text-black mb-4">개인정보처리방침</h3>
+                <div className="text-sm text-gray-600 space-y-2 mb-4 p-4 bg-white rounded-lg border">
+                  <p><strong>수집목적:</strong> 프로젝트 상담 및 견적 제공</p>
+                  <p><strong>수집항목:</strong> 이름, 연락처, 이메일, 회사명</p>
+                  <p><strong>보유기간:</strong> 상담 완료 후 1년</p>
+                  <p><strong>문의:</strong> voro2520@gmail.com / 010-5344-9868</p>
                 </div>
 
-                <label className="flex items-start space-x-3 cursor-pointer mb-8">
+                <label className="flex items-center space-x-3 cursor-pointer">
                   <input
                     type="checkbox"
                     name="agreePrivacy"
                     required
                     checked={formData.agreePrivacy}
                     onChange={handleInputChange}
-                    className="w-5 h-5 text-black border-gray-300 rounded focus:ring-black mt-0.5"
+                    className="w-5 h-5 text-black border-gray-300 rounded focus:ring-black"
                   />
-                  <span className="text-gray-700">
-                    개인정보처리방침에 동의합니다. *
+                  <span className="text-gray-700 font-medium">
+                    개인정보 수집 및 이용에 동의합니다. *
                   </span>
                 </label>
               </section>
 
               {/* Submit Message */}
               {submitMessage && (
-                <div className={`text-center p-4 rounded-lg mb-8 ${
+                <div className={`text-center p-6 rounded-xl text-lg font-medium ${
                   submitMessage.includes('성공적으로') 
-                    ? 'bg-green-100 text-green-800 border border-green-200' 
-                    : 'bg-red-100 text-red-800 border border-red-200'
+                    ? 'bg-green-100 text-green-800 border-2 border-green-200' 
+                    : 'bg-red-100 text-red-800 border-2 border-red-200'
                 }`}>
                   {submitMessage}
+                  {submitMessage.includes('오류') && (
+                    <div className="mt-4 text-center">
+                      <a 
+                        href="tel:010-5344-9868"
+                        className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-lg font-bold hover:bg-gray-800 transition-colors"
+                      >
+                        📞 010-5344-9868로 전화하기
+                      </a>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -336,10 +402,13 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-black hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-16 py-4 text-lg font-semibold transition-colors"
+                  className="bg-black hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-16 py-5 text-xl font-bold rounded-xl transition-colors shadow-lg"
                 >
-                  {isSubmitting ? '전송 중...' : '프로젝트 문의하기'}
+                  {isSubmitting ? '전송 중...' : '🚀 문의하기'}
                 </button>
+                <p className="text-sm text-gray-500 mt-4">
+                  급하시면 <strong>카카오톡</strong>이나 <strong>전화</strong>로 연락주세요!
+                </p>
               </div>
             </form>
           </div>

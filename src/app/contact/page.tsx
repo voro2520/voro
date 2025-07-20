@@ -1,10 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import Link from 'next/link';
 
+interface FormData {
+  name: string;
+  company: string;
+  phone: string;
+  email: string;
+  serviceType: string;
+  projectType: string;
+  budget: string;
+  period: string;
+  description: string;
+  agreePrivacy: boolean;
+}
+
 export default function Contact() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     company: '',
     phone: '',
@@ -20,7 +33,7 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     
     if (type === 'checkbox') {
@@ -31,7 +44,7 @@ export default function Contact() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     
     if (!formData.name || !formData.phone || !formData.email) {
@@ -147,7 +160,7 @@ export default function Contact() {
           </div>
 
           {/* Contact Form */}
-          <div className="space-y-8">
+          <form onSubmit={handleSubmit} className="space-y-8">
             {/* 기본정보 */}
             <div className="bg-gray-50 p-8 rounded-xl">
               <h2 className="text-2xl font-bold text-black mb-6">📝 기본정보</h2>
@@ -166,6 +179,12 @@ export default function Contact() {
                     className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                     placeholder="홍길동"
                     autoComplete="name"
+                    style={{
+                      WebkitAppearance: 'none',
+                      MozAppearance: 'textfield',
+                      pointerEvents: 'auto',
+                      touchAction: 'manipulation'
+                    }}
                   />
                 </div>
                 <div>
@@ -181,6 +200,12 @@ export default function Contact() {
                     className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                     placeholder="(주)회사명 (선택)"
                     autoComplete="organization"
+                    style={{
+                      WebkitAppearance: 'none',
+                      MozAppearance: 'textfield',
+                      pointerEvents: 'auto',
+                      touchAction: 'manipulation'
+                    }}
                   />
                 </div>
                 <div>
@@ -197,6 +222,12 @@ export default function Contact() {
                     className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                     placeholder="010-1234-5678"
                     autoComplete="tel"
+                    style={{
+                      WebkitAppearance: 'none',
+                      MozAppearance: 'textfield',
+                      pointerEvents: 'auto',
+                      touchAction: 'manipulation'
+                    }}
                   />
                 </div>
                 <div>
@@ -213,6 +244,12 @@ export default function Contact() {
                     className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                     placeholder="example@company.com"
                     autoComplete="email"
+                    style={{
+                      WebkitAppearance: 'none',
+                      MozAppearance: 'textfield',
+                      pointerEvents: 'auto',
+                      touchAction: 'manipulation'
+                    }}
                   />
                 </div>
               </div>
@@ -231,6 +268,12 @@ export default function Contact() {
                   value={formData.serviceType}
                   onChange={handleInputChange}
                   className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
+                  style={{
+                    WebkitAppearance: 'none',
+                    MozAppearance: 'none',
+                    pointerEvents: 'auto',
+                    touchAction: 'manipulation'
+                  }}
                 >
                   <option value="">선택해주세요</option>
                   <option value="홈페이지 제작">홈페이지 제작 (회사소개, 제품소개)</option>
@@ -252,6 +295,12 @@ export default function Contact() {
                     value={formData.projectType}
                     onChange={handleInputChange}
                     className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
+                    style={{
+                      WebkitAppearance: 'none',
+                      MozAppearance: 'none',
+                      pointerEvents: 'auto',
+                      touchAction: 'manipulation'
+                    }}
                   >
                     <option value="">선택해주세요</option>
                     <option value="새로 만들기">새로 만들기</option>
@@ -268,6 +317,12 @@ export default function Contact() {
                     value={formData.budget}
                     onChange={handleInputChange}
                     className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
+                    style={{
+                      WebkitAppearance: 'none',
+                      MozAppearance: 'none',
+                      pointerEvents: 'auto',
+                      touchAction: 'manipulation'
+                    }}
                   >
                     <option value="">선택해주세요</option>
                     <option value="100만원 이하">100만원 이하</option>
@@ -288,6 +343,12 @@ export default function Contact() {
                   value={formData.period}
                   onChange={handleInputChange}
                   className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
+                  style={{
+                    WebkitAppearance: 'none',
+                    MozAppearance: 'none',
+                    pointerEvents: 'auto',
+                    touchAction: 'manipulation'
+                  }}
                 >
                   <option value="">선택해주세요</option>
                   <option value="1개월 이내">1개월 이내</option>
@@ -311,6 +372,12 @@ export default function Contact() {
                   rows={6}
                   placeholder="원하시는 기능이나 참고할 사이트, 궁금한 점 등을 자유롭게 적어주세요."
                   className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg resize-none transition-colors"
+                  style={{
+                    WebkitAppearance: 'none',
+                    MozAppearance: 'textfield',
+                    pointerEvents: 'auto',
+                    touchAction: 'manipulation'
+                  }}
                 />
               </div>
             </div>
@@ -332,6 +399,10 @@ export default function Contact() {
                   checked={formData.agreePrivacy}
                   onChange={handleInputChange}
                   className="w-5 h-5 text-black border-gray-300 rounded focus:ring-black"
+                  style={{
+                    pointerEvents: 'auto',
+                    touchAction: 'manipulation'
+                  }}
                 />
                 <span className="text-gray-700 font-medium">
                   개인정보 수집 및 이용에 동의합니다. *
@@ -363,10 +434,13 @@ export default function Contact() {
             {/* Submit Button */}
             <div className="text-center">
               <button
-                type="button"
-                onClick={handleSubmit}
+                type="submit"
                 disabled={isSubmitting}
                 className="bg-black hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-16 py-5 text-xl font-bold rounded-xl transition-colors shadow-lg cursor-pointer"
+                style={{
+                  pointerEvents: 'auto',
+                  touchAction: 'manipulation'
+                }}
               >
                 {isSubmitting ? '전송 중...' : '🚀 문의하기'}
               </button>
@@ -374,7 +448,7 @@ export default function Contact() {
                 급하시면 <strong>카카오톡</strong>이나 <strong>전화</strong>로 연락주세요!
               </p>
             </div>
-          </div>
+          </form>
         </div>
       </main>
 

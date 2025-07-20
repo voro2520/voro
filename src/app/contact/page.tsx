@@ -77,333 +77,381 @@ export default function Contact() {
   };
 
   return (
-    <html>
-      <head>
-        <title>VORO - Contact</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <style>{`
-          * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-          }
-          
-          body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: white;
-          }
-          
-          .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-          }
-          
-          .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px 0;
-            border-bottom: 2px solid #333;
-          }
-          
-          .quick-contact {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin: 30px 0;
-          }
-          
-          .quick-contact a {
-            display: inline-block;
-            padding: 15px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            text-align: center;
-          }
-          
-          .kakao-btn {
-            background: #fee500;
-            color: black;
-          }
-          
-          .phone-btn {
-            background: black;
-            color: white;
-          }
-          
-          .form-section {
-            margin: 30px 0;
-            padding: 20px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-          }
-          
-          .form-group {
-            margin-bottom: 20px;
-          }
-          
-          .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-          }
-          
-          label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #333;
-          }
-          
-          input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            font-family: Arial, sans-serif;
-            background: white;
-            color: black;
-          }
-          
-          input:focus, select:focus, textarea:focus {
-            border-color: #007bff;
-            outline: none;
-          }
-          
-          textarea {
-            min-height: 120px;
-            resize: vertical;
-          }
-          
-          .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-          }
-          
-          .checkbox-group input[type="checkbox"] {
-            width: auto;
-          }
-          
-          .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: black;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-          }
-          
-          .submit-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-          }
-          
-          .message {
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-            text-align: center;
-          }
-          
-          .success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-          }
-          
-          .error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-          }
-        `}</style>
-      </head>
-      <body>
-        <div className="container">
-          
-          <div className="header">
-            <h1>VORO - 견적 문의</h1>
-            <p>웹사이트 제작 전문</p>
-          </div>
+    <div style={{
+      fontFamily: 'Arial, sans-serif',
+      maxWidth: '800px',
+      margin: '0 auto',
+      padding: '20px',
+      background: 'white',
+      minHeight: '100vh'
+    }}>
+      
+      {/* Header */}
+      <div style={{
+        textAlign: 'center',
+        marginBottom: '40px',
+        padding: '30px 0',
+        borderBottom: '3px solid #333'
+      }}>
+        <h1 style={{ 
+          fontSize: '48px', 
+          margin: '0 0 10px 0', 
+          color: 'black',
+          fontWeight: 'bold'
+        }}>
+          VORO
+        </h1>
+        <p style={{ 
+          fontSize: '18px', 
+          color: '#666', 
+          margin: 0 
+        }}>
+          웹사이트 제작 전문 · 견적 문의
+        </p>
+      </div>
 
-          <div className="quick-contact">
-            <a href="http://pf.kakao.com/_tExfLG" target="_blank" rel="noopener noreferrer" className="kakao-btn">
-              💬 카카오톡 상담하기
-            </a>
-            <a href="tel:010-5344-9868" className="phone-btn">
-              📞 전화 상담하기
-            </a>
-          </div>
+      {/* Quick Contact */}
+      <div style={{
+        display: 'flex',
+        gap: '20px',
+        justifyContent: 'center',
+        marginBottom: '40px'
+      }}>
+        <a 
+          href="http://pf.kakao.com/_tExfLG" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          style={{
+            display: 'inline-block',
+            padding: '15px 30px',
+            background: '#fee500',
+            color: 'black',
+            textDecoration: 'none',
+            borderRadius: '8px',
+            fontWeight: 'bold',
+            fontSize: '16px'
+          }}
+        >
+          💬 카카오톡 상담하기
+        </a>
+        <a 
+          href="tel:010-5344-9868"
+          style={{
+            display: 'inline-block',
+            padding: '15px 30px',
+            background: 'black',
+            color: 'white',
+            textDecoration: 'none',
+            borderRadius: '8px',
+            fontWeight: 'bold',
+            fontSize: '16px'
+          }}
+        >
+          📞 전화 상담하기
+        </a>
+      </div>
 
-          <div style={{ textAlign: 'center', margin: '20px 0', color: '#666' }}>
-            <p>또는 아래 폼을 작성해주세요</p>
-          </div>
+      <div style={{ textAlign: 'center', marginBottom: '40px', color: '#666' }}>
+        <p>또는 아래 폼을 작성해주세요</p>
+      </div>
 
-          <form onSubmit={handleSubmit}>
+      {/* Contact Form */}
+      <form onSubmit={handleSubmit}>
+        
+        {/* 기본 정보 */}
+        <div style={{
+          border: '3px solid #ddd',
+          borderRadius: '10px',
+          padding: '30px',
+          marginBottom: '30px',
+          background: '#f8f9fa'
+        }}>
+          <h2 style={{ marginBottom: '25px', color: 'black' }}>📝 기본 정보</h2>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+            <div>
+              <label htmlFor="name" style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#333' }}>
+                이름 *
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                value={formData.name}
+                onChange={handleInputChange}
+                placeholder="홍길동"
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  fontSize: '16px',
+                  border: '2px solid #ccc',
+                  borderRadius: '5px',
+                  background: 'white',
+                  color: 'black',
+                  boxSizing: 'border-box'
+                }}
+              />
+            </div>
             
-            <div className="form-section">
-              <h2>기본 정보</h2>
-              
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="name">이름 *</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="홍길동"
-                  />
-                </div>
-                
-                <div className="form-group">
-                  <label htmlFor="company">회사명</label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleInputChange}
-                    placeholder="(주)회사명 (선택)"
-                  />
-                </div>
-              </div>
-              
-              <div className="form-row">
-                <div className="form-group">
-                  <label htmlFor="phone">연락처 *</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    placeholder="010-1234-5678"
-                  />
-                </div>
-                
-                <div className="form-group">
-                  <label htmlFor="email">이메일 *</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="example@company.com"
-                  />
-                </div>
-              </div>
+            <div>
+              <label htmlFor="company" style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#333' }}>
+                회사명
+              </label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                value={formData.company}
+                onChange={handleInputChange}
+                placeholder="(주)회사명 (선택)"
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  fontSize: '16px',
+                  border: '2px solid #ccc',
+                  borderRadius: '5px',
+                  background: 'white',
+                  color: 'black',
+                  boxSizing: 'border-box'
+                }}
+              />
             </div>
+          </div>
+          
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+            <div>
+              <label htmlFor="phone" style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#333' }}>
+                연락처 *
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                value={formData.phone}
+                onChange={handleInputChange}
+                placeholder="010-1234-5678"
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  fontSize: '16px',
+                  border: '2px solid #ccc',
+                  borderRadius: '5px',
+                  background: 'white',
+                  color: 'black',
+                  boxSizing: 'border-box'
+                }}
+              />
+            </div>
+            
+            <div>
+              <label htmlFor="email" style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#333' }}>
+                이메일 *
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                value={formData.email}
+                onChange={handleInputChange}
+                placeholder="example@company.com"
+                style={{
+                  width: '100%',
+                  padding: '12px',
+                  fontSize: '16px',
+                  border: '2px solid #ccc',
+                  borderRadius: '5px',
+                  background: 'white',
+                  color: 'black',
+                  boxSizing: 'border-box'
+                }}
+              />
+            </div>
+          </div>
+        </div>
 
-            <div className="form-section">
-              <h2>서비스 정보</h2>
-              
-              <div className="form-group">
-                <label htmlFor="serviceType">어떤 서비스가 필요하신가요?</label>
-                <select
-                  id="serviceType"
-                  name="serviceType"
-                  value={formData.serviceType}
-                  onChange={handleInputChange}
+        {/* 서비스 정보 */}
+        <div style={{
+          border: '3px solid #ddd',
+          borderRadius: '10px',
+          padding: '30px',
+          marginBottom: '30px',
+          background: 'white'
+        }}>
+          <h2 style={{ marginBottom: '25px', color: 'black' }}>🚀 서비스 정보</h2>
+          
+          <div style={{ marginBottom: '20px' }}>
+            <label htmlFor="serviceType" style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#333' }}>
+              어떤 서비스가 필요하신가요?
+            </label>
+            <select
+              id="serviceType"
+              name="serviceType"
+              value={formData.serviceType}
+              onChange={handleInputChange}
+              style={{
+                width: '100%',
+                padding: '12px',
+                fontSize: '16px',
+                border: '2px solid #ccc',
+                borderRadius: '5px',
+                background: 'white',
+                color: 'black',
+                boxSizing: 'border-box'
+              }}
+            >
+              <option value="">선택해주세요</option>
+              <option value="홈페이지 제작">홈페이지 제작 (회사소개, 제품소개)</option>
+              <option value="쇼핑몰 제작">쇼핑몰 제작 (온라인 판매)</option>
+              <option value="랜딩페이지">랜딩페이지 (이벤트, 프로모션)</option>
+              <option value="브랜딩">브랜딩 (로고, 디자인)</option>
+              <option value="앱 개발">앱 개발 (모바일 앱)</option>
+              <option value="기타">기타 (직접 상담)</option>
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="description" style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#333' }}>
+              어떤 사이트를 원하시나요?
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+              rows={5}
+              placeholder="원하시는 기능이나 참고할 사이트, 궁금한 점 등을 자유롭게 적어주세요."
+              style={{
+                width: '100%',
+                padding: '12px',
+                fontSize: '16px',
+                border: '2px solid #ccc',
+                borderRadius: '5px',
+                background: 'white',
+                color: 'black',
+                resize: 'vertical',
+                boxSizing: 'border-box',
+                fontFamily: 'Arial, sans-serif'
+              }}
+            />
+          </div>
+        </div>
+
+        {/* 개인정보처리방침 */}
+        <div style={{
+          border: '2px solid #ddd',
+          borderRadius: '10px',
+          padding: '25px',
+          marginBottom: '30px',
+          background: '#f8f9fa'
+        }}>
+          <h3 style={{ marginBottom: '15px', color: 'black' }}>개인정보처리방침</h3>
+          <div style={{
+            background: 'white',
+            padding: '15px',
+            borderRadius: '5px',
+            marginBottom: '15px',
+            border: '1px solid #ddd'
+          }}>
+            <p style={{ margin: '5px 0' }}><strong>수집목적:</strong> 프로젝트 상담 및 견적 제공</p>
+            <p style={{ margin: '5px 0' }}><strong>수집항목:</strong> 이름, 연락처, 이메일, 회사명</p>
+            <p style={{ margin: '5px 0' }}><strong>보유기간:</strong> 상담 완료 후 1년</p>
+            <p style={{ margin: '5px 0' }}><strong>문의:</strong> voro2520@gmail.com / 010-5344-9868</p>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <input
+              type="checkbox"
+              id="agreePrivacy"
+              name="agreePrivacy"
+              checked={formData.agreePrivacy}
+              onChange={handleInputChange}
+              style={{ width: '18px', height: '18px' }}
+            />
+            <label htmlFor="agreePrivacy" style={{ color: '#333', fontWeight: '500' }}>
+              개인정보 수집 및 이용에 동의합니다. *
+            </label>
+          </div>
+        </div>
+
+        {/* Submit Message */}
+        {submitMessage && (
+          <div style={{
+            textAlign: 'center',
+            padding: '20px',
+            borderRadius: '8px',
+            marginBottom: '20px',
+            background: submitMessage.includes('성공적으로') ? '#d4edda' : '#f8d7da',
+            color: submitMessage.includes('성공적으로') ? '#155724' : '#721c24',
+            border: submitMessage.includes('성공적으로') ? '2px solid #c3e6cb' : '2px solid #f5c6cb'
+          }}>
+            {submitMessage}
+            {submitMessage.includes('오류') && (
+              <div style={{ marginTop: '15px' }}>
+                <a 
+                  href="tel:010-5344-9868"
+                  style={{
+                    background: 'black',
+                    color: 'white',
+                    padding: '10px 20px',
+                    textDecoration: 'none',
+                    borderRadius: '5px',
+                    fontWeight: 'bold'
+                  }}
                 >
-                  <option value="">선택해주세요</option>
-                  <option value="홈페이지 제작">홈페이지 제작 (회사소개, 제품소개)</option>
-                  <option value="쇼핑몰 제작">쇼핑몰 제작 (온라인 판매)</option>
-                  <option value="랜딩페이지">랜딩페이지 (이벤트, 프로모션)</option>
-                  <option value="브랜딩">브랜딩 (로고, 디자인)</option>
-                  <option value="앱 개발">앱 개발 (모바일 앱)</option>
-                  <option value="기타">기타 (직접 상담)</option>
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="description">어떤 사이트를 원하시나요?</label>
-                <textarea
-                  id="description"
-                  name="description"
-                  value={formData.description}
-                  onChange={handleInputChange}
-                  rows={6}
-                  placeholder="원하시는 기능이나 참고할 사이트, 궁금한 점 등을 자유롭게 적어주세요."
-                />
-              </div>
-            </div>
-
-            <div className="form-section">
-              <h3>개인정보처리방침</h3>
-              <div style={{ background: '#f9f9f9', padding: '15px', borderRadius: '5px', margin: '10px 0' }}>
-                <p><strong>수집목적:</strong> 프로젝트 상담 및 견적 제공</p>
-                <p><strong>수집항목:</strong> 이름, 연락처, 이메일, 회사명</p>
-                <p><strong>보유기간:</strong> 상담 완료 후 1년</p>
-                <p><strong>문의:</strong> voro2520@gmail.com / 010-5344-9868</p>
-              </div>
-
-              <div className="checkbox-group">
-                <input
-                  type="checkbox"
-                  id="agreePrivacy"
-                  name="agreePrivacy"
-                  checked={formData.agreePrivacy}
-                  onChange={handleInputChange}
-                />
-                <label htmlFor="agreePrivacy">개인정보 수집 및 이용에 동의합니다. *</label>
-              </div>
-            </div>
-
-            {submitMessage && (
-              <div className={`message ${submitMessage.includes('성공적으로') ? 'success' : 'error'}`}>
-                {submitMessage}
-                {submitMessage.includes('오류') && (
-                  <div style={{ marginTop: '10px' }}>
-                    <a href="tel:010-5344-9868" style={{ background: 'black', color: 'white', padding: '10px 20px', textDecoration: 'none', borderRadius: '5px' }}>
-                      📞 010-5344-9868로 전화하기
-                    </a>
-                  </div>
-                )}
+                  📞 010-5344-9868로 전화하기
+                </a>
               </div>
             )}
+          </div>
+        )}
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="submit-btn"
-            >
-              {isSubmitting ? '전송 중...' : '🚀 문의하기'}
-            </button>
-            
-            <div style={{ textAlign: 'center', marginTop: '20px', color: '#666' }}>
-              <p>급하시면 <strong>카카오톡</strong>이나 <strong>전화</strong>로 연락주세요!</p>
-            </div>
-          </form>
-
-          <footer style={{ marginTop: '60px', padding: '30px 0', borderTop: '2px solid #333', textAlign: 'center', background: '#f8f9fa' }}>
-            <h3>VORO</h3>
-            <p>Digital Solutions Company</p>
-            <div style={{ marginTop: '15px' }}>
-              <div>대표자. 임세화</div>
-              <div>Tel. 010-5344-9868</div>
-              <div>Mail. voro2520@gmail.com</div>
-              <div>Head office. 수원시 장안구 조원동 552-4</div>
-            </div>
-            <div style={{ marginTop: '15px', color: '#666' }}>
-              ©VORO All rights reserved.
-            </div>
-          </footer>
+        {/* Submit Button */}
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          style={{
+            width: '100%',
+            padding: '20px',
+            fontSize: '20px',
+            fontWeight: 'bold',
+            background: isSubmitting ? '#ccc' : 'black',
+            color: 'white',
+            border: 'none',
+            borderRadius: '8px',
+            cursor: isSubmitting ? 'not-allowed' : 'pointer'
+          }}
+        >
+          {isSubmitting ? '전송 중...' : '🚀 문의하기'}
+        </button>
+        
+        <div style={{ textAlign: 'center', marginTop: '20px', color: '#666' }}>
+          <p>급하시면 <strong>카카오톡</strong>이나 <strong>전화</strong>로 연락주세요!</p>
         </div>
-      </body>
-    </html>
+      </form>
+
+      {/* Footer */}
+      <footer style={{
+        marginTop: '60px',
+        padding: '30px 0',
+        borderTop: '3px solid #333',
+        textAlign: 'center',
+        background: '#f8f9fa'
+      }}>
+        <h3 style={{ margin: '0 0 10px 0', color: 'black' }}>VORO</h3>
+        <p style={{ margin: '0 0 15px 0', color: '#666' }}>Digital Solutions Company</p>
+        <div style={{ color: '#333' }}>
+          <div>대표자. 임세화</div>
+          <div>Tel. 010-5344-9868</div>
+          <div>Mail. voro2520@gmail.com</div>
+          <div>Head office. 수원시 장안구 조원동 552-4</div>
+        </div>
+        <div style={{ marginTop: '15px', color: '#999' }}>
+          ©VORO All rights reserved.
+        </div>
+      </footer>
+    </div>
   );
 } 

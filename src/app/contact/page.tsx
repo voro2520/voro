@@ -1,23 +1,10 @@
 'use client';
 
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 
-interface FormData {
-  name: string;
-  company: string;
-  phone: string;
-  email: string;
-  serviceType: string;
-  projectType: string;
-  budget: string;
-  period: string;
-  description: string;
-  agreePrivacy: boolean;
-}
-
 export default function Contact() {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState({
     name: '',
     company: '',
     phone: '',
@@ -33,18 +20,15 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
-    
-    if (type === 'checkbox') {
-      const checked = (e.target as HTMLInputElement).checked;
-      setFormData(prev => ({ ...prev, [name]: checked }));
-    } else {
-      setFormData(prev => ({ ...prev, [name]: value }));
-    }
+  const handleInputChange = (e: any) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     
     if (!formData.name || !formData.phone || !formData.email) {
@@ -76,7 +60,6 @@ export default function Contact() {
 
       if (result.success) {
         setSubmitMessage('문의가 성공적으로 전송되었습니다! 빠른 시일 내에 연락드리겠습니다. 🚀');
-        // 폼 초기화
         setFormData({
           name: '',
           company: '',
@@ -101,72 +84,110 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div style={{ minHeight: '100vh', backgroundColor: 'white' }}>
       {/* Header */}
-      <header className="fixed w-full top-0 z-50 backdrop-blur-sm bg-white/95 border-b border-gray-100">
-        <div className="w-full px-8 sm:px-12 lg:px-16">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center">
-              <h1 className="text-2xl font-bold text-black">VORO</h1>
-              <span className="ml-2 text-sm text-gray-600">웹/앱 제작</span>
+      <header style={{ 
+        position: 'fixed', 
+        width: '100%', 
+        top: 0, 
+        zIndex: 50, 
+        backgroundColor: 'rgba(255,255,255,0.95)', 
+        borderBottom: '1px solid #e5e7eb',
+        backdropFilter: 'blur(8px)'
+      }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 32px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px' }}>
+            <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+              <h1 style={{ fontSize: '24px', fontWeight: 'bold', color: 'black', margin: 0 }}>VORO</h1>
+              <span style={{ marginLeft: '8px', fontSize: '14px', color: '#6b7280' }}>웹/앱 제작</span>
             </Link>
             
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-black transition-colors font-medium">홈</Link>
-              <Link href="/#about" className="text-gray-700 hover:text-black transition-colors font-medium">VORO소개</Link>
-              <Link href="/#services" className="text-gray-700 hover:text-black transition-colors font-medium">서비스안내</Link>
-              <Link href="/#portfolio" className="text-gray-700 hover:text-black transition-colors font-medium">포트폴리오</Link>
-              <Link href="/contact" className="text-black font-medium">견적문의</Link>
+            <nav style={{ display: 'flex', gap: '32px' }}>
+              <Link href="/" style={{ color: '#374151', textDecoration: 'none', fontWeight: '500' }}>홈</Link>
+              <Link href="/#about" style={{ color: '#374151', textDecoration: 'none', fontWeight: '500' }}>VORO소개</Link>
+              <Link href="/#services" style={{ color: '#374151', textDecoration: 'none', fontWeight: '500' }}>서비스안내</Link>
+              <Link href="/#portfolio" style={{ color: '#374151', textDecoration: 'none', fontWeight: '500' }}>포트폴리오</Link>
+              <Link href="/contact" style={{ color: 'black', textDecoration: 'none', fontWeight: '500' }}>견적문의</Link>
             </nav>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="pt-24 pb-16">
-        <div className="max-w-4xl mx-auto px-6 sm:px-8">
+      <main style={{ paddingTop: '96px', paddingBottom: '64px' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 24px' }}>
+          
           {/* Page Title */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-6xl font-black text-black mb-6">CONTACT</h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+            <h1 style={{ fontSize: '48px', fontWeight: 'black', color: 'black', marginBottom: '24px' }}>CONTACT</h1>
+            <p style={{ fontSize: '18px', color: '#6b7280', marginBottom: '32px' }}>
               빠르고 간편한 상담을 원하신다면<br />
               <strong>카카오톡이나 전화</strong>로 연락해주세요!
             </p>
             
             {/* 빠른 연락 방법 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto mb-12">
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', maxWidth: '600px', margin: '0 auto 48px' }}>
               <a 
                 href="http://pf.kakao.com/_tExfLG" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-4 rounded-lg font-bold text-lg transition-colors cursor-pointer"
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  gap: '12px', 
+                  backgroundColor: '#fee500', 
+                  color: 'black', 
+                  padding: '16px 24px', 
+                  borderRadius: '8px', 
+                  fontWeight: 'bold', 
+                  fontSize: '18px', 
+                  textDecoration: 'none',
+                  border: 'none',
+                  cursor: 'pointer'
+                }}
               >
                 <span>💬</span>
                 카카오톡 상담하기
               </a>
               <a 
                 href="tel:010-5344-9868"
-                className="flex items-center justify-center gap-3 bg-black hover:bg-gray-800 text-white px-6 py-4 rounded-lg font-bold text-lg transition-colors cursor-pointer"
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  gap: '12px', 
+                  backgroundColor: 'black', 
+                  color: 'white', 
+                  padding: '16px 24px', 
+                  borderRadius: '8px', 
+                  fontWeight: 'bold', 
+                  fontSize: '18px', 
+                  textDecoration: 'none',
+                  border: 'none',
+                  cursor: 'pointer'
+                }}
               >
                 <span>📞</span>
                 전화 상담하기
               </a>
             </div>
             
-            <div className="text-center text-gray-500 mb-8">
+            <div style={{ textAlign: 'center', color: '#6b7280', marginBottom: '32px' }}>
               <p>또는 아래 폼을 작성해주세요</p>
-              <div className="w-16 h-px bg-gray-300 mx-auto mt-4"></div>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <form onSubmit={handleSubmit} className="space-y-8">
+          {/* Contact Form - 기본 HTML 폼 */}
+          <form onSubmit={handleSubmit} style={{ display: 'block' }}>
+            
             {/* 기본정보 */}
-            <div className="bg-gray-50 p-8 rounded-xl">
-              <h2 className="text-2xl font-bold text-black mb-6">📝 기본정보</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div style={{ backgroundColor: '#f9fafb', padding: '32px', borderRadius: '12px', marginBottom: '32px' }}>
+              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: 'black', marginBottom: '24px' }}>📝 기본정보</h2>
+              
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '24px' }}>
                 <div>
-                  <label htmlFor="name" className="block text-sm font-bold text-gray-800 mb-2">
+                  <label htmlFor="name" style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#374151', marginBottom: '8px' }}>
                     이름 *
                   </label>
                   <input
@@ -176,19 +197,23 @@ export default function Contact() {
                     required
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                     placeholder="홍길동"
-                    autoComplete="name"
                     style={{
-                      WebkitAppearance: 'none',
-                      MozAppearance: 'textfield',
-                      pointerEvents: 'auto',
-                      touchAction: 'manipulation'
+                      width: '100%',
+                      padding: '12px',
+                      border: '2px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: '16px',
+                      backgroundColor: 'white',
+                      color: 'black',
+                      outline: 'none',
+                      boxSizing: 'border-box'
                     }}
                   />
                 </div>
+                
                 <div>
-                  <label htmlFor="company" className="block text-sm font-bold text-gray-800 mb-2">
+                  <label htmlFor="company" style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#374151', marginBottom: '8px' }}>
                     회사명
                   </label>
                   <input
@@ -197,19 +222,25 @@ export default function Contact() {
                     name="company"
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                     placeholder="(주)회사명 (선택)"
-                    autoComplete="organization"
                     style={{
-                      WebkitAppearance: 'none',
-                      MozAppearance: 'textfield',
-                      pointerEvents: 'auto',
-                      touchAction: 'manipulation'
+                      width: '100%',
+                      padding: '12px',
+                      border: '2px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: '16px',
+                      backgroundColor: 'white',
+                      color: 'black',
+                      outline: 'none',
+                      boxSizing: 'border-box'
                     }}
                   />
                 </div>
+              </div>
+              
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-bold text-gray-800 mb-2">
+                  <label htmlFor="phone" style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#374151', marginBottom: '8px' }}>
                     연락처 *
                   </label>
                   <input
@@ -219,19 +250,23 @@ export default function Contact() {
                     required
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                     placeholder="010-1234-5678"
-                    autoComplete="tel"
                     style={{
-                      WebkitAppearance: 'none',
-                      MozAppearance: 'textfield',
-                      pointerEvents: 'auto',
-                      touchAction: 'manipulation'
+                      width: '100%',
+                      padding: '12px',
+                      border: '2px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: '16px',
+                      backgroundColor: 'white',
+                      color: 'black',
+                      outline: 'none',
+                      boxSizing: 'border-box'
                     }}
                   />
                 </div>
+                
                 <div>
-                  <label htmlFor="email" className="block text-sm font-bold text-gray-800 mb-2">
+                  <label htmlFor="email" style={{ display: 'block', fontSize: '14px', fontWeight: 'bold', color: '#374151', marginBottom: '8px' }}>
                     이메일 *
                   </label>
                   <input
@@ -241,14 +276,17 @@ export default function Contact() {
                     required
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                     placeholder="example@company.com"
-                    autoComplete="email"
                     style={{
-                      WebkitAppearance: 'none',
-                      MozAppearance: 'textfield',
-                      pointerEvents: 'auto',
-                      touchAction: 'manipulation'
+                      width: '100%',
+                      padding: '12px',
+                      border: '2px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: '16px',
+                      backgroundColor: 'white',
+                      color: 'black',
+                      outline: 'none',
+                      boxSizing: 'border-box'
                     }}
                   />
                 </div>
@@ -256,23 +294,27 @@ export default function Contact() {
             </div>
 
             {/* 프로젝트 정보 */}
-            <div className="bg-white border-2 border-gray-200 p-8 rounded-xl">
-              <h2 className="text-2xl font-bold text-black mb-6">🚀 어떤 서비스가 필요하신가요?</h2>
+            <div style={{ backgroundColor: 'white', border: '2px solid #e5e7eb', padding: '32px', borderRadius: '12px', marginBottom: '32px' }}>
+              <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: 'black', marginBottom: '24px' }}>🚀 어떤 서비스가 필요하신가요?</h2>
 
               {/* 서비스 유형 */}
-              <div className="mb-8">
-                <label htmlFor="serviceType" className="block text-lg font-bold text-black mb-4">서비스 유형</label>
+              <div style={{ marginBottom: '24px' }}>
+                <label htmlFor="serviceType" style={{ display: 'block', fontSize: '18px', fontWeight: 'bold', color: 'black', marginBottom: '16px' }}>서비스 유형</label>
                 <select
                   id="serviceType"
                   name="serviceType"
                   value={formData.serviceType}
                   onChange={handleInputChange}
-                  className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                   style={{
-                    WebkitAppearance: 'none',
-                    MozAppearance: 'none',
-                    pointerEvents: 'auto',
-                    touchAction: 'manipulation'
+                    width: '100%',
+                    padding: '12px',
+                    border: '2px solid #d1d5db',
+                    borderRadius: '8px',
+                    fontSize: '16px',
+                    backgroundColor: 'white',
+                    color: 'black',
+                    outline: 'none',
+                    boxSizing: 'border-box'
                   }}
                 >
                   <option value="">선택해주세요</option>
@@ -286,20 +328,24 @@ export default function Contact() {
               </div>
 
               {/* 제작 유형 & 예산 */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '24px' }}>
                 <div>
-                  <label htmlFor="projectType" className="block text-lg font-bold text-black mb-4">제작 유형</label>
+                  <label htmlFor="projectType" style={{ display: 'block', fontSize: '18px', fontWeight: 'bold', color: 'black', marginBottom: '16px' }}>제작 유형</label>
                   <select
                     id="projectType"
                     name="projectType"
                     value={formData.projectType}
                     onChange={handleInputChange}
-                    className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                     style={{
-                      WebkitAppearance: 'none',
-                      MozAppearance: 'none',
-                      pointerEvents: 'auto',
-                      touchAction: 'manipulation'
+                      width: '100%',
+                      padding: '12px',
+                      border: '2px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: '16px',
+                      backgroundColor: 'white',
+                      color: 'black',
+                      outline: 'none',
+                      boxSizing: 'border-box'
                     }}
                   >
                     <option value="">선택해주세요</option>
@@ -310,18 +356,22 @@ export default function Contact() {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="budget" className="block text-lg font-bold text-black mb-4">예상 예산</label>
+                  <label htmlFor="budget" style={{ display: 'block', fontSize: '18px', fontWeight: 'bold', color: 'black', marginBottom: '16px' }}>예상 예산</label>
                   <select
                     id="budget"
                     name="budget"
                     value={formData.budget}
                     onChange={handleInputChange}
-                    className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                     style={{
-                      WebkitAppearance: 'none',
-                      MozAppearance: 'none',
-                      pointerEvents: 'auto',
-                      touchAction: 'manipulation'
+                      width: '100%',
+                      padding: '12px',
+                      border: '2px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: '16px',
+                      backgroundColor: 'white',
+                      color: 'black',
+                      outline: 'none',
+                      boxSizing: 'border-box'
                     }}
                   >
                     <option value="">선택해주세요</option>
@@ -335,19 +385,23 @@ export default function Contact() {
               </div>
 
               {/* 기간 */}
-              <div className="mb-8">
-                <label htmlFor="period" className="block text-lg font-bold text-black mb-4">언제까지 필요하신가요?</label>
+              <div style={{ marginBottom: '24px' }}>
+                <label htmlFor="period" style={{ display: 'block', fontSize: '18px', fontWeight: 'bold', color: 'black', marginBottom: '16px' }}>언제까지 필요하신가요?</label>
                 <select
                   id="period"
                   name="period"
                   value={formData.period}
                   onChange={handleInputChange}
-                  className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg transition-colors"
                   style={{
-                    WebkitAppearance: 'none',
-                    MozAppearance: 'none',
-                    pointerEvents: 'auto',
-                    touchAction: 'manipulation'
+                    width: '100%',
+                    padding: '12px',
+                    border: '2px solid #d1d5db',
+                    borderRadius: '8px',
+                    fontSize: '16px',
+                    backgroundColor: 'white',
+                    color: 'black',
+                    outline: 'none',
+                    boxSizing: 'border-box'
                   }}
                 >
                   <option value="">선택해주세요</option>
@@ -360,8 +414,8 @@ export default function Contact() {
 
               {/* 상세 설명 */}
               <div>
-                <label htmlFor="description" className="block text-lg font-bold text-black mb-4">💡 어떤 사이트를 원하시나요?</label>
-                <p className="text-sm text-gray-600 mb-4">
+                <label htmlFor="description" style={{ display: 'block', fontSize: '18px', fontWeight: 'bold', color: 'black', marginBottom: '16px' }}>💡 어떤 사이트를 원하시나요?</label>
+                <p style={{ fontSize: '14px', color: '#6b7280', marginBottom: '16px' }}>
                   예) "카페 홈페이지인데 메뉴소개랑 매장위치가 나왔으면 좋겠어요", "쇼핑몰인데 결제기능이 필요해요" 등 편하게 적어주세요.
                 </p>
                 <textarea
@@ -371,40 +425,46 @@ export default function Contact() {
                   onChange={handleInputChange}
                   rows={6}
                   placeholder="원하시는 기능이나 참고할 사이트, 궁금한 점 등을 자유롭게 적어주세요."
-                  className="w-full p-4 border-2 border-gray-300 focus:border-black focus:outline-none bg-white text-gray-900 rounded-lg resize-none transition-colors"
                   style={{
-                    WebkitAppearance: 'none',
-                    MozAppearance: 'textfield',
-                    pointerEvents: 'auto',
-                    touchAction: 'manipulation'
+                    width: '100%',
+                    padding: '12px',
+                    border: '2px solid #d1d5db',
+                    borderRadius: '8px',
+                    fontSize: '16px',
+                    backgroundColor: 'white',
+                    color: 'black',
+                    outline: 'none',
+                    resize: 'vertical',
+                    boxSizing: 'border-box',
+                    fontFamily: 'inherit'
                   }}
                 />
               </div>
             </div>
 
             {/* 개인정보처리방침 */}
-            <div className="bg-gray-50 p-6 rounded-xl">
-              <h3 className="text-lg font-bold text-black mb-4">개인정보처리방침</h3>
-              <div className="text-sm text-gray-600 space-y-2 mb-4 p-4 bg-white rounded-lg border">
-                <p><strong>수집목적:</strong> 프로젝트 상담 및 견적 제공</p>
-                <p><strong>수집항목:</strong> 이름, 연락처, 이메일, 회사명</p>
-                <p><strong>보유기간:</strong> 상담 완료 후 1년</p>
-                <p><strong>문의:</strong> voro2520@gmail.com / 010-5344-9868</p>
+            <div style={{ backgroundColor: '#f9fafb', padding: '24px', borderRadius: '12px', marginBottom: '32px' }}>
+              <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: 'black', marginBottom: '16px' }}>개인정보처리방침</h3>
+              <div style={{ fontSize: '14px', color: '#6b7280', marginBottom: '16px', padding: '16px', backgroundColor: 'white', borderRadius: '8px', border: '1px solid #d1d5db' }}>
+                <p style={{ margin: '8px 0' }}><strong>수집목적:</strong> 프로젝트 상담 및 견적 제공</p>
+                <p style={{ margin: '8px 0' }}><strong>수집항목:</strong> 이름, 연락처, 이메일, 회사명</p>
+                <p style={{ margin: '8px 0' }}><strong>보유기간:</strong> 상담 완료 후 1년</p>
+                <p style={{ margin: '8px 0' }}><strong>문의:</strong> voro2520@gmail.com / 010-5344-9868</p>
               </div>
 
-              <label className="flex items-center space-x-3 cursor-pointer">
+              <label style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }}>
                 <input
                   type="checkbox"
                   name="agreePrivacy"
                   checked={formData.agreePrivacy}
                   onChange={handleInputChange}
-                  className="w-5 h-5 text-black border-gray-300 rounded focus:ring-black"
                   style={{
-                    pointerEvents: 'auto',
-                    touchAction: 'manipulation'
+                    width: '20px',
+                    height: '20px',
+                    margin: 0
                   }}
                 />
-                <span className="text-gray-700 font-medium">
+                <span style={{ color: '#374151', fontWeight: '500' }}>
                   개인정보 수집 및 이용에 동의합니다. *
                 </span>
               </label>
@@ -412,17 +472,33 @@ export default function Contact() {
 
             {/* Submit Message */}
             {submitMessage && (
-              <div className={`text-center p-6 rounded-xl text-lg font-medium ${
-                submitMessage.includes('성공적으로') 
-                  ? 'bg-green-100 text-green-800 border-2 border-green-200' 
-                  : 'bg-red-100 text-red-800 border-2 border-red-200'
-              }`}>
+              <div style={{ 
+                textAlign: 'center', 
+                padding: '24px', 
+                borderRadius: '12px', 
+                fontSize: '18px', 
+                fontWeight: '500',
+                marginBottom: '32px',
+                backgroundColor: submitMessage.includes('성공적으로') ? '#dcfce7' : '#fef2f2',
+                color: submitMessage.includes('성공적으로') ? '#166534' : '#dc2626',
+                border: submitMessage.includes('성공적으로') ? '2px solid #bbf7d0' : '2px solid #fecaca'
+              }}>
                 {submitMessage}
                 {submitMessage.includes('오류') && (
-                  <div className="mt-4 text-center">
+                  <div style={{ marginTop: '16px', textAlign: 'center' }}>
                     <a 
                       href="tel:010-5344-9868"
-                      className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-lg font-bold hover:bg-gray-800 transition-colors"
+                      style={{ 
+                        display: 'inline-flex', 
+                        alignItems: 'center', 
+                        gap: '8px', 
+                        backgroundColor: 'black', 
+                        color: 'white', 
+                        padding: '12px 24px', 
+                        borderRadius: '8px', 
+                        fontWeight: 'bold', 
+                        textDecoration: 'none' 
+                      }}
                     >
                       📞 010-5344-9868로 전화하기
                     </a>
@@ -432,19 +508,25 @@ export default function Contact() {
             )}
 
             {/* Submit Button */}
-            <div className="text-center">
+            <div style={{ textAlign: 'center' }}>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-black hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-16 py-5 text-xl font-bold rounded-xl transition-colors shadow-lg cursor-pointer"
                 style={{
-                  pointerEvents: 'auto',
-                  touchAction: 'manipulation'
+                  backgroundColor: isSubmitting ? '#9ca3af' : 'black',
+                  color: 'white',
+                  padding: '20px 64px',
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  borderRadius: '12px',
+                  border: 'none',
+                  cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
                 }}
               >
                 {isSubmitting ? '전송 중...' : '🚀 문의하기'}
               </button>
-              <p className="text-sm text-gray-500 mt-4">
+              <p style={{ fontSize: '14px', color: '#6b7280', marginTop: '16px' }}>
                 급하시면 <strong>카카오톡</strong>이나 <strong>전화</strong>로 연락주세요!
               </p>
             </div>
@@ -453,27 +535,27 @@ export default function Contact() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-black text-white py-12">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <footer style={{ backgroundColor: 'black', color: 'white', padding: '48px 0' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
             <div>
-              <h3 className="text-2xl font-bold mb-2">VORO</h3>
-              <p className="text-gray-400 mb-4">Digital Solutions Company</p>
-              <div className="text-sm text-gray-400">
+              <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '8px' }}>VORO</h3>
+              <p style={{ color: '#9ca3af', marginBottom: '16px' }}>Digital Solutions Company</p>
+              <div style={{ fontSize: '14px', color: '#9ca3af' }}>
                 <div>대표자. 임세화</div>
                 <div>Tel. 010-5344-9868</div>
                 <div>Mail. voro2520@gmail.com</div>
               </div>
             </div>
-            <div className="text-sm text-gray-400">
-              <div className="mb-2">
+            <div style={{ fontSize: '14px', color: '#9ca3af' }}>
+              <div style={{ marginBottom: '8px' }}>
                 <strong>Head office.</strong> 수원시 장안구 조원동 552-4
               </div>
-              <div className="flex space-x-4 mt-4">
-                <Link href="#" className="hover:text-white transition-colors">개인정보처리방침</Link>
-                <Link href="#" className="hover:text-white transition-colors">이용약관</Link>
+              <div style={{ display: 'flex', gap: '16px', marginTop: '16px' }}>
+                <Link href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>개인정보처리방침</Link>
+                <Link href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>이용약관</Link>
               </div>
-              <div className="mt-4">
+              <div style={{ marginTop: '16px' }}>
                 ©VORO All rights reserved.
               </div>
             </div>

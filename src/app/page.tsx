@@ -1,13 +1,11 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [currentSection, setCurrentSection] = useState(0);
   const [isWhiteTheme, setIsWhiteTheme] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
 
   const sections = useMemo(() => [
     {
@@ -16,81 +14,99 @@ export default function Home() {
     }
   ], []);
 
-  // 스크롤 이벤트
-  useEffect(() => {
-    const handleScroll = () => {
-      const aboutSection = document.getElementById('about');
-      const servicesSection = document.getElementById('services');
+  // 스크롤 이벤트 최적화 (throttle 적용)
+  const handleScroll = useCallback(() => {
+    const aboutSection = document.getElementById('about');
+    const servicesSection = document.getElementById('services');
+    
+    if (aboutSection && servicesSection) {
+      const aboutRect = aboutSection.getBoundingClientRect();
+      const servicesRect = servicesSection.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const triggerPoint = windowHeight * 0.8;
       
-      if (aboutSection && servicesSection) {
-        const aboutRect = aboutSection.getBoundingClientRect();
-        const servicesRect = servicesSection.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const triggerPoint = windowHeight * 0.8;
-        
-        if (aboutRect.top <= triggerPoint && servicesRect.top > triggerPoint) {
-          setIsWhiteTheme(true);
-        } else {
-          setIsWhiteTheme(false);
-        }
+      const shouldBeWhite = aboutRect.top <= triggerPoint && servicesRect.top > triggerPoint;
+      if (shouldBeWhite !== isWhiteTheme) {
+        setIsWhiteTheme(shouldBeWhite);
       }
+    }
 
-      // 텍스트 애니메이션
-      const textElements = document.querySelectorAll('[data-scroll-text]');
-      textElements.forEach((element) => {
-        const rect = element.getBoundingClientRect();
-        const elementTop = rect.top;
-        const elementHeight = rect.height;
-        const windowHeight = window.innerHeight;
+    // 텍스트 애니메이션 최적화
+    const textElements = document.querySelectorAll('[data-scroll-text]');
+    textElements.forEach((element) => {
+      const rect = element.getBoundingClientRect();
+      const elementTop = rect.top;
+      const elementHeight = rect.height;
+      const windowHeight = window.innerHeight;
+      
+      if (elementTop < windowHeight * 0.7 && elementTop > -elementHeight) {
+        const progress = Math.max(0, Math.min(1, (windowHeight * 0.7 - elementTop) / (windowHeight * 0.3)));
         
-        if (elementTop < windowHeight * 0.7 && elementTop > -elementHeight) {
-          const progress = Math.max(0, Math.min(1, (windowHeight * 0.7 - elementTop) / (windowHeight * 0.3)));
-          
-          if (progress > 0.3) {
-            element.classList.remove('text-gray-400');
-            element.classList.add('text-black');
-          } else {
-            element.classList.remove('text-black');
-            element.classList.add('text-gray-400');
-          }
+        if (progress > 0.3) {
+          element.classList.remove('text-gray-400');
+          element.classList.add('text-black');
         } else {
           element.classList.remove('text-black');
           element.classList.add('text-gray-400');
         }
-      });
+      } else {
+        element.classList.remove('text-black');
+        element.classList.add('text-gray-400');
+      }
+    });
+  }, [isWhiteTheme]);
 
-
+  useEffect(() => {
+    let ticking = false;
+    
+    const throttledScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('scroll', throttledScroll, { passive: true });
+    return () => window.removeEventListener('scroll', throttledScroll);
+  }, [handleScroll]);
 
-  // 마우스 위치 추적 (부드러운 패럴랙스 효과)
+  // 마우스 위치 추적 최적화 (throttle 적용)
   useEffect(() => {
     let animationId: number;
+    let lastUpdateTime = 0;
     const targetPosition = { x: 0, y: 0 };
+    const updateInterval = 16; // ~60fps
     
     const handleMouseMove = (e: MouseEvent) => {
       targetPosition.x = (e.clientX / window.innerWidth - 0.5) * 2;
       targetPosition.y = (e.clientY / window.innerHeight - 0.5) * 2;
     };
 
-    const updatePosition = () => {
-      setMousePosition(prev => ({
-        x: prev.x + (targetPosition.x - prev.x) * 0.05,
-        y: prev.y + (targetPosition.y - prev.y) * 0.05
-      }));
+    const updatePosition = (currentTime: number) => {
+      if (currentTime - lastUpdateTime >= updateInterval) {
+        setMousePosition(prev => ({
+          x: prev.x + (targetPosition.x - prev.x) * 0.05,
+          y: prev.y + (targetPosition.y - prev.y) * 0.05
+        }));
+        lastUpdateTime = currentTime;
+      }
       animationId = requestAnimationFrame(updatePosition);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     animationId = requestAnimationFrame(updatePosition);
     
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationId);
     };
+  }, []);
+
+  const navigateToContact = useCallback(() => {
+    window.location.href = '/contact';
   }, []);
 
   return (
@@ -142,43 +158,14 @@ export default function Home() {
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="min-h-[600px] sm:min-h-[700px] flex flex-col justify-center">
               <div className="mb-8 sm:mb-12">
-                <div className="text-left w-full no-cursor no-outline no-border">
-                  <h1 
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6 sm:mb-8 opacity-0 animate-fade-in-up text-white no-cursor no-outline no-border" 
-                                         style={{ 
-                       caretColor: 'transparent', 
-                       outline: '0', 
-                       userSelect: 'none',
-                       border: '0',
-                       boxShadow: 'none',
-                       textShadow: 'none',
-                       background: 'transparent',
-                       pointerEvents: 'none'
-                     }}
-                    tabIndex={-1}
-                    unselectable="on"
-                  >
+                <div className="text-left w-full no-select">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6 sm:mb-8 opacity-0 animate-fade-in-up text-white no-select">
                     디자인으로, 브랜드의 기준을 바꿉니다.
                   </h1>
                 </div>
                 
-                <div className="text-left w-full no-cursor no-outline no-border">
-                  <div 
-                    className="text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-full lg:max-w-3xl opacity-0 animate-fade-in-up delay-300 text-gray-400 no-cursor no-outline no-border" 
-                                         style={{ 
-                       caretColor: 'transparent', 
-                       outline: '0', 
-                       userSelect: 'none',
-                       border: '0',
-                       boxShadow: 'none',
-                       textShadow: 'none',
-                       background: 'transparent',
-                       pointerEvents: 'none',
-                       whiteSpace: 'pre-line'
-                     }}
-                    tabIndex={-1}
-                    unselectable="on"
-                  >
+                <div className="text-left w-full no-select">
+                  <div className="text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-full lg:max-w-3xl opacity-0 animate-fade-in-up delay-300 text-gray-400 no-select whitespace-pre-line">
                     사업의 크기가 아닌{'\n'}가능성과 방향을 먼저 생각합니다.{'\n'}VORO는 브랜드의 가치를 디자인합니다.
                   </div>
                 </div>
@@ -186,7 +173,7 @@ export default function Home() {
               
               <div className="mt-8 sm:mt-12 text-left w-full opacity-0 animate-fade-in-up delay-500">
                 <div 
-                  onClick={() => window.location.href = '/contact'}
+                  onClick={navigateToContact}
                   className="contact-button group cursor-pointer inline-flex items-center gap-2 text-white font-medium hover:text-gray-300 transition-colors"
                 >
                   <span className="text-lg sm:text-xl lg:text-2xl font-bold">CONTACT US</span>
@@ -195,8 +182,6 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-
-
             </div>
           </div>
         </section>
@@ -205,10 +190,9 @@ export default function Home() {
         <section id="services" className="py-20 sm:py-24 lg:py-32 bg-black relative overflow-hidden z-10 min-h-screen flex items-center justify-start w-full max-w-full">
           <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
             <div 
-              className="text-[10rem] sm:text-[14rem] md:text-[18rem] lg:text-[22rem] xl:text-[26rem] 2xl:text-[30rem] font-black text-white/15 leading-none select-none will-change-transform"
+              className="text-[10rem] sm:text-[14rem] md:text-[18rem] lg:text-[22rem] xl:text-[26rem] 2xl:text-[30rem] font-black text-white/15 leading-none select-none will-change-transform animate-voro-float animate-pulse-slow"
               style={{
                 transform: `translate3d(${mousePosition.x * 15}px, ${mousePosition.y * 15}px, 0)`,
-                animation: 'voro-float-services 20s ease-in-out infinite, voro-pulse 15s ease-in-out infinite, voro-glow 12s ease-in-out infinite',
                 transition: 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               }}
             >

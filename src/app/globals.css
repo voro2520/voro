@@ -21,10 +21,9 @@
   }
 }
 
+/* 기본 스타일 최적화 */
 html {
   overflow-x: hidden;
-  width: 100%;
-  max-width: 100%;
   font-display: swap;
   scroll-behavior: smooth;
 }
@@ -34,8 +33,6 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   overflow-x: hidden;
-  width: 100%;
-  max-width: 100%;
   margin: 0;
   padding: 0;
   font-feature-settings: "kern" 1, "liga" 1;
@@ -44,741 +41,44 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 모든 요소에 대한 기본 박스 사이징 */
+/* 박스 사이징 */
 *, *::before, *::after {
   box-sizing: border-box;
-  max-width: 100%;
 }
 
-/* 컨테이너 요소들의 수평 오버플로우 방지 */
-div, header, main, footer {
+/* 수평 오버플로우 방지 */
+div, header, main, footer, section {
   max-width: 100%;
   overflow-x: hidden;
 }
 
-/* section 요소는 sticky를 위해 overflow 제거 */
-section {
-  max-width: 100%;
-}
-
-/* 텍스트 요소들의 줄바꿈 처리 */
+/* 텍스트 요소 최적화 */
 h1, h2, h3, h4, h5, h6, p, span {
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
+}
+
+/* 사용자 선택 제어 (간소화) */
+.no-select {
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  cursor: default;
+}
+
+/* 포커스 상태 최적화 */
+*:focus {
   outline: none;
-  border: none;
-  caret-color: transparent;
 }
 
-/* 포커스 및 아웃라인 제거 */
-*:focus {
-  outline: none !important;
-  box-shadow: none !important;
-  border: none !important;
+/* 입력 필드는 정상 동작하도록 */
+input, textarea, [contenteditable="true"] {
+  user-select: text;
+  cursor: text;
 }
 
-/* 텍스트 커서 제거 */
-div, span, p, h1, h2, h3, h4, h5, h6 {
-  caret-color: transparent !important;
-  outline: none !important;
-}
-
-/* 모든 가상 요소의 커서 및 아웃라인 제거 */
-*::before, *::after {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-}
-
-/* 전체 요소에 대한 강력한 커서 제거 */
-* {
-  caret-color: transparent !important;
-  outline: none !important;
-}
-
-/* 극강의 세로줄 완전 제거 - 모든 상태 */
-*, *:hover, *:focus, *:active, *:visited {
-  caret-color: transparent !important;
-  outline: 0 !important;
-  border-left: 0 !important;
-  border-right: 0 !important;
-  border-top: 0 !important;
-  border-bottom: 0 !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  appearance: none !important;
-  -webkit-text-stroke: 0 !important;
-  text-stroke: 0 !important;
-}
-
-/* contentEditable 요소 커서 제거 */
-[contenteditable] {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-}
-
-/* 텍스트 선택 시 커서 제거 */
-::selection {
-  background: transparent !important;
-}
-
-::-moz-selection {
-  background: transparent !important;
-}
-
-/* 강력한 커서 및 세로줄 제거 */
-body * {
-  caret-color: transparent !important;
-  outline: none !important;
-  border-right: none !important;
-  box-shadow: none !important;
-}
-
-/* 가상 요소 세로줄 제거 */
-*::after, *::before {
-  content: none !important;
-  border: none !important;
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-/* 텍스트 관련 요소 강력 제거 */
-h1, h2, h3, h4, h5, h6, p, span, div {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-}
-
-/* 홈 섹션 전체에 대한 강력한 제거 */
-#home * {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  background-image: none !important;
-}
-
-/* 애니메이션 중 나타날 수 있는 효과 제거 */
-.animate-fade-in-up * {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-}
-
-/* 그라데이션 텍스트 관련 */
-.bg-clip-text {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-/* 모든 가능한 세로줄 제거 - 최종 솔루션 */
-* {
-  caret-color: transparent !important;
-  outline: 0 !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-}
-
-*:focus {
-  caret-color: transparent !important;
-  outline: 0 !important;
-  border: 0 !important;
-  box-shadow: none !important;
-}
-
-*:active {
-  caret-color: transparent !important;
-  outline: 0 !important;
-  border: 0 !important;
-  box-shadow: none !important;
-}
-
-/* 텍스트 입력 및 편집 완전 차단 */
-input, textarea, [contenteditable] {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  pointer-events: none !important;
-}
-
-/* 모든 가상 요소 제거 */
-*::before, *::after {
-  display: none !important;
-  content: '' !important;
-  border: none !important;
-  background: none !important;
-  box-shadow: none !important;
-}
-
-/* 특정 브라우저 세로줄 제거 */
-::-webkit-input-placeholder { caret-color: transparent !important; }
-::-moz-placeholder { caret-color: transparent !important; }
-:-ms-input-placeholder { caret-color: transparent !important; }
-:-moz-placeholder { caret-color: transparent !important; }
-
-/* 커스텀 클래스로 강력한 세로줄 제거 */
-.no-cursor {
-  caret-color: transparent !important;
-  cursor: default !important;
-}
-
-.no-outline {
-  outline: none !important;
-  outline-width: 0 !important;
-  outline-style: none !important;
-  outline-color: transparent !important;
-}
-
-.no-border {
-  border: none !important;
-  border-width: 0 !important;
-  border-style: none !important;
-  border-color: transparent !important;
-  border-right: none !important;
-  border-left: none !important;
-  border-top: none !important;
-  border-bottom: none !important;
-}
-
-/* 버튼 및 링크 요소 세로줄 제거 */
-a, button {
-  caret-color: transparent !important;
-  outline: none !important;
-  border-right: none !important;
-  text-decoration: none !important;
-}
-
-a:hover, button:hover {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-  border-right: none !important;
-  text-decoration: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  background-image: none !important;
-}
-
-/* 모든 요소의 호버 상태에서 세로줄 완전 제거 */
-*:hover {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  background-image: none !important;
-}
-
-/* 특별히 텍스트 요소들의 호버 상태 */
-h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover, 
-p:hover, span:hover, div:hover {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  background-image: none !important;
-  cursor: default !important;
-}
-
-/* Contact us 버튼 및 모든 링크 버튼 호버 상태 특별 처리 */
-a:hover, a:hover *, a:focus, a:focus *, a:active, a:active * {
-  caret-color: transparent !important;
-  outline: none !important;
-  border-left: none !important;
-  border-right: none !important;
-  border-top: none !important;
-  border-bottom: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  background-image: none !important;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  appearance: none !important;
-}
-
-/* 버튼 요소들의 모든 상태에서 세로줄 제거 */
-button:hover, button:hover *, button:focus, button:focus *, button:active, button:active * {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  background-image: none !important;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  appearance: none !important;
-}
-
-/* 특별히 홈 섹션의 Contact us 버튼 */
-#home a:hover, #home a:hover *, #home a:focus, #home a:focus *, #home a:active, #home a:active * {
-  caret-color: transparent !important;
-  outline: none !important;
-  border-left: none !important;
-  border-right: none !important;
-  border-top: none !important;
-  border-bottom: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  background-image: none !important;
-  -webkit-text-stroke: none !important;
-}
-
-/* SVG 아이콘도 포함 */
-svg:hover {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-}
-
-a:focus, button:focus {
-  caret-color: transparent !important;
-  outline: none !important;
-  border-right: none !important;
-  text-decoration: none !important;
-}
-
-a:active, button:active {
-  caret-color: transparent !important;
-  outline: none !important;
-  border-right: none !important;
-  text-decoration: none !important;
-}
-
-/* SVG 요소 세로줄 제거 */
-svg {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-svg:hover {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-/* 웹킷 기반 브라우저용 스크롤바 스타일 */
-.overflow-x-auto::-webkit-scrollbar {
-  height: 8px;
-}
-
-.overflow-x-auto::-webkit-scrollbar-track {
-  background: #1f2937;
-  border-radius: 4px;
-}
-
-.overflow-x-auto::-webkit-scrollbar-thumb {
-  background: #374151;
-  border-radius: 4px;
-}
-
-.overflow-x-auto::-webkit-scrollbar-thumb:hover {
-  background: #4b5563;
-}
-
-/* 포트폴리오 자동 스크롤 애니메이션 */
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-scroll {
-  animation: scroll 30s linear infinite;
-}
-
-.animate-scroll:hover {
-  animation-play-state: paused;
-}
-
-/* 그래픽 배경 애니메이션들 */
-@keyframes gradient-shift {
-  0%, 100% {
-    background: linear-gradient(135deg, rgba(30, 58, 138, 0.3) 0%, rgba(88, 28, 135, 0.2) 50%, rgba(157, 23, 77, 0.3) 100%);
-  }
-  25% {
-    background: linear-gradient(135deg, rgba(157, 23, 77, 0.3) 0%, rgba(30, 58, 138, 0.2) 50%, rgba(88, 28, 135, 0.3) 100%);
-  }
-  50% {
-    background: linear-gradient(135deg, rgba(88, 28, 135, 0.3) 0%, rgba(157, 23, 77, 0.2) 50%, rgba(30, 58, 138, 0.3) 100%);
-  }
-  75% {
-    background: linear-gradient(135deg, rgba(30, 58, 138, 0.3) 0%, rgba(157, 23, 77, 0.2) 50%, rgba(88, 28, 135, 0.3) 100%);
-  }
-}
-
-@keyframes pulse-slow {
-  0%, 100% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 0.4;
-    box-shadow: 0 0 20px currentColor;
-  }
-  50% {
-    opacity: 0.8;
-    box-shadow: 0 0 40px currentColor, 0 0 60px currentColor;
-  }
-}
-
-@keyframes spin-slow {
-  from {
-    transform: rotate(45deg);
-  }
-  to {
-    transform: rotate(405deg);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px) rotate(12deg);
-  }
-  50% {
-    transform: translateY(-20px) rotate(12deg);
-  }
-}
-
-/* VORO 로고 자연스러운 움직임 애니메이션 */
-@keyframes voro-float-home {
-  0%, 100% {
-    transform: translateY(0px) translateX(0px) scale(1);
-  }
-  25% {
-    transform: translateY(-3px) translateX(1px) scale(1.005);
-  }
-  50% {
-    transform: translateY(-8px) translateX(0px) scale(1.01);
-  }
-  75% {
-    transform: translateY(-3px) translateX(-1px) scale(1.005);
-  }
-}
-
-@keyframes voro-float-services {
-  0%, 100% {
-    transform: translateY(0px) translateX(0px) scale(1);
-  }
-  20% {
-    transform: translateY(-5px) translateX(2px) scale(1.01);
-  }
-  40% {
-    transform: translateY(-12px) translateX(-1px) scale(1.02);
-  }
-  60% {
-    transform: translateY(-8px) translateX(-3px) scale(1.015);
-  }
-  80% {
-    transform: translateY(-3px) translateX(1px) scale(1.008);
-  }
-}
-
-@keyframes voro-float {
-  0%, 100% {
-    transform: translateY(0px) translateX(0px) scale(1);
-  }
-  20% {
-    transform: translateY(-5px) translateX(2px) scale(1.01);
-  }
-  40% {
-    transform: translateY(-12px) translateX(-1px) scale(1.02);
-  }
-  60% {
-    transform: translateY(-8px) translateX(-3px) scale(1.01);
-  }
-  80% {
-    transform: translateY(-3px) translateX(1px) scale(1.005);
-  }
-}
-
-@keyframes voro-pulse {
-  0%, 100% {
-    opacity: 0.15;
-    filter: blur(0px) brightness(1);
-  }
-  20% {
-    opacity: 0.18;
-    filter: blur(0.1px) brightness(1.05);
-  }
-  40% {
-    opacity: 0.20;
-    filter: blur(0.2px) brightness(1.1);
-  }
-  60% {
-    opacity: 0.17;
-    filter: blur(0.1px) brightness(1.03);
-  }
-  80% {
-    opacity: 0.14;
-    filter: blur(0px) brightness(0.98);
-  }
-}
-
-@keyframes voro-pulse-slow {
-  0%, 100% {
-    opacity: 0.05;
-    filter: blur(0px) brightness(1);
-  }
-  25% {
-    opacity: 0.08;
-    filter: blur(0.1px) brightness(1.1);
-  }
-  50% {
-    opacity: 0.10;
-    filter: blur(0.2px) brightness(1.2);
-  }
-  75% {
-    opacity: 0.07;
-    filter: blur(0.1px) brightness(1.05);
-  }
-}
-
-@keyframes voro-glow {
-  0%, 100% {
-    text-shadow: 
-      0 0 10px rgba(255, 255, 255, 0.08),
-      0 0 20px rgba(255, 255, 255, 0.06),
-      0 0 30px rgba(255, 255, 255, 0.04);
-  }
-  25% {
-    text-shadow: 
-      0 0 15px rgba(255, 255, 255, 0.12),
-      0 0 30px rgba(255, 255, 255, 0.08),
-      0 0 45px rgba(255, 255, 255, 0.06);
-  }
-  50% {
-    text-shadow: 
-      0 0 20px rgba(255, 255, 255, 0.15),
-      0 0 40px rgba(255, 255, 255, 0.10),
-      0 0 60px rgba(255, 255, 255, 0.08);
-  }
-  75% {
-    text-shadow: 
-      0 0 15px rgba(255, 255, 255, 0.12),
-      0 0 30px rgba(255, 255, 255, 0.08),
-      0 0 45px rgba(255, 255, 255, 0.06);
-  }
-}
-
-@keyframes float-particle {
-  0%, 100% {
-    transform: translateY(0px) translateX(0px);
-    opacity: 0.6;
-  }
-  25% {
-    transform: translateY(-10px) translateX(5px);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(-20px) translateX(0px);
-    opacity: 0.8;
-  }
-  75% {
-    transform: translateY(-10px) translateX(-5px);
-    opacity: 1;
-  }
-}
-
-@keyframes laser-sweep {
-  0% {
-    opacity: 0;
-    transform: translateX(-100%) rotate(12deg);
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(100%) rotate(12deg);
-  }
-}
-
-@keyframes scanline {
-  0% {
-    transform: translateY(-100vh);
-  }
-  100% {
-    transform: translateY(100vh);
-  }
-}
-
-@keyframes voro-slide-down {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  20% {
-    opacity: 0.1;
-  }
-  80% {
-    opacity: 0.1;
-  }
-  100% {
-    transform: translateY(20%);
-    opacity: 0.05;
-  }
-}
-
-/* 홈화면 배경 스크롤 애니메이션 */
-@keyframes scroll-right {
-  0% {
-    transform: translateX(-120%);
-  }
-  100% {
-    transform: translateX(120%);
-  }
-}
-
-@keyframes scroll-left {
-  0% {
-    transform: translateX(120%);
-  }
-  100% {
-    transform: translateX(-120%);
-  }
-}
-
-@keyframes scroll-right-slow {
-  0% {
-    transform: translateX(-120%);
-  }
-  100% {
-    transform: translateX(120%);
-  }
-}
-
-.animate-gradient-shift {
-  animation: gradient-shift 8s ease-in-out infinite;
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 3s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-.animate-spin-slow {
-  animation: spin-slow 20s linear infinite;
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.animate-float-particle {
-  animation: float-particle 4s ease-in-out infinite;
-}
-
-.animate-laser-sweep {
-  animation: laser-sweep 6s ease-in-out infinite;
-}
-
-.animate-scanline {
-  animation: scanline 3s linear infinite;
-}
-
-.animate-voro-slide-down {
-  animation: voro-slide-down 8s ease-out infinite;
-}
-
-.animate-scroll-right {
-  animation: scroll-right 60s linear infinite;
-}
-
-.animate-scroll-left {
-  animation: scroll-left 65s linear infinite;
-}
-
-.animate-scroll-right-slow {
-  animation: scroll-right-slow 70s linear infinite;
-}
-
-/* 홈 배경 스크롤 텍스트 커서 완전 제거 */
-.animate-scroll-right, 
-.animate-scroll-left, 
-.animate-scroll-right-slow {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  user-select: none !important;
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  pointer-events: none !important;
-  cursor: default !important;
-  -webkit-touch-callout: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-}
-
-.animate-scroll-right *, 
-.animate-scroll-left *, 
-.animate-scroll-right-slow * {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  user-select: none !important;
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  pointer-events: none !important;
-  cursor: default !important;
-  -webkit-touch-callout: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-}
-
-/* Fade in 애니메이션 */
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 1s ease-out forwards;
-}
-
-/* 홈화면 텍스트 애니메이션 */
+/* 핵심 애니메이션만 유지 */
 @keyframes fade-in-up {
   0% {
     opacity: 0;
@@ -790,197 +90,43 @@ svg:hover {
   }
 }
 
-.animate-fade-in-up {
-  animation: fade-in-up 1s ease-out forwards;
+@keyframes voro-float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) translateX(0px) scale(1.01);
+  }
 }
 
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out forwards;
+  }
+
+.animate-voro-float {
+  animation: voro-float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+/* 지연 클래스 */
 .delay-300 {
   animation-delay: 0.3s;
 }
 
 .delay-500 {
   animation-delay: 0.5s;
-}
-
-.delay-1000 {
-  animation-delay: 1s;
-}
-
-/* 그라데이션 텍스트 애니메이션 */
-@keyframes gradient-shift-text {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.animate-gradient-shift {
-  background-size: 200% 200%;
-  animation: gradient-shift-text 3s ease-in-out infinite;
-}
-
-/* 새로운 시작 애니메이션 */
-@keyframes new-beginning {
-  0% {
-    opacity: 0;
-    transform: scale(0.8) translateY(50px);
-  }
-  30% {
-    opacity: 0.3;
-    transform: scale(0.9) translateY(20px);
-  }
-  60% {
-    opacity: 0.7;
-    transform: scale(1.05) translateY(-10px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-@keyframes sparkle {
-  0%, 100% {
-    opacity: 0;
-    transform: scale(0) rotate(0deg);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1) rotate(180deg);
-  }
-}
-
-@keyframes wave-expand {
-  0% {
-    width: 0;
-    opacity: 0.8;
-  }
-  50% {
-    opacity: 0.4;
-  }
-  100% {
-    width: 100%;
-    opacity: 0;
-  }
-}
-
-.animate-new-beginning {
-  animation: new-beginning 2s ease-out forwards;
-}
-
-.animate-sparkle {
-  animation: sparkle 2s ease-in-out infinite;
-}
-
-.animate-wave-expand {
-  animation: wave-expand 2s ease-out forwards;
-}
-
-/* 오른쪽에서 슬라이드 인 애니메이션 */
-@keyframes slide-in-right {
-  0% {
-    opacity: 0;
-    transform: translateX(100px) translateY(-50%) scale(0.8);
-  }
-  30% {
-    opacity: 0.3;
-    transform: translateX(50px) translateY(-50%) scale(0.9);
-  }
-  60% {
-    opacity: 0.7;
-    transform: translateX(-10px) translateY(-50%) scale(1.05);
-  }
-  80% {
-    opacity: 0.9;
-    transform: translateX(5px) translateY(-50%) scale(1.02);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0) translateY(-50%) scale(1);
-  }
-}
-
-.animate-slide-in-right {
-  animation: slide-in-right 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-
-/* 포트폴리오 카드 3D 효과 */
-.portfolio-card {
-  perspective: 1000px;
-}
-
-.portfolio-card:hover {
-  transform-style: preserve-3d;
-}
-
-/* VORO Design Tour JavaScript 기반 중첩 효과 */
-[data-tour-section] {
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-/* 폰트 최적화 */
-@layer base {
-  html {
-    font-display: swap;
-    scroll-behavior: smooth;
-  }
-  
-  body {
-    font-feature-settings: "kern" 1, "liga" 1;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-}
-
-/* 성능 최적화 */
-@layer utilities {
-  .will-change-transform {
-    will-change: transform;
-  }
-  
-  .contain-layout {
-    contain: layout;
-  }
-  
-  .contain-paint {
-    contain: paint;
-  }
-}
-
-/* 애니메이션 최적화 */
-@layer components {
-  .animate-fade-in {
-    animation: fadeIn 0.8s ease-out;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .animate-voro-slide-down {
-    animation: voroSlideDown 8s linear infinite;
-  }
-  
-  @keyframes voroSlideDown {
-    0% {
-      transform: translateY(-100vh);
-    }
-    100% {
-      transform: translateY(100vh);
-    }
-  }
 }
 
 /* 스크롤바 스타일링 */
@@ -1001,34 +147,17 @@ svg:hover {
   background: #555;
 }
 
-/* 모바일에서 VORO 애니메이션 최적화 */
-@media (max-width: 768px) {
-  @keyframes voro-float {
-    0%, 100% {
-      transform: translateY(0px) translateX(0px) scale(1);
+/* 성능 최적화 클래스 */
+.will-change-transform {
+  will-change: transform;
+}
+
+.contain-layout {
+  contain: layout;
     }
-    50% {
-      transform: translateY(-5px) translateX(0px) scale(1.005);
-    }
-  }
-  
-  @keyframes voro-pulse {
-    0%, 100% {
-      opacity: 0.20;
-    }
-    50% {
-      opacity: 0.25;
-    }
-  }
-  
-  @keyframes voro-glow {
-    0%, 100% {
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-    }
-    50% {
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
-    }
-  }
+
+.contain-paint {
+  contain: paint;
 }
 
 /* 접근성 개선 */
@@ -1036,367 +165,26 @@ svg:hover {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
   }
 }
 
-/* 고대비 모드 지원 */
-@media (prefers-contrast: high) {
-  .text-gray-400 {
-    color: #666 !important;
+/* Contact 버튼 스타일 (간소화) */
+.contact-button {
+  cursor: pointer;
+  border: 2px solid white;
   }
-  
-  .text-gray-300 {
-    color: #999 !important;
-  }
+
+.contact-button:hover {
+  background: white;
+  color: black;
 }
 
-/* 최종 해결책 - Contact us 버튼 세로줄 완전 제거 */
-.group[onclick*="contact"], .group[onclick*="contact"]:hover, .group[onclick*="contact"]:focus, .group[onclick*="contact"]:active,
-a[href="/contact"], a[href="/contact"]:hover, a[href="/contact"]:focus, a[href="/contact"]:active {
-  caret-color: transparent !important;
-  outline: 0 !important;
-  border-left: 0 !important;
-  border-right: 0 !important;
-  border-top: 2px solid white !important;
-  border-bottom: 2px solid white !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  appearance: none !important;
-  -webkit-text-stroke: 0 !important;
-  -webkit-text-fill-color: unset !important;
-  background-clip: unset !important;
-  -webkit-background-clip: unset !important;
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+  .animate-voro-float {
+    animation: voro-float 8s ease-in-out infinite;
 }
-
-.group[onclick*="contact"] *, .group[onclick*="contact"]:hover *, .group[onclick*="contact"]:focus *, .group[onclick*="contact"]:active *,
-a[href="/contact"] *, a[href="/contact"]:hover *, a[href="/contact"]:focus *, a[href="/contact"]:active * {
-  caret-color: transparent !important;
-  outline: 0 !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  appearance: none !important;
-  -webkit-text-stroke: 0 !important;
-  -webkit-text-fill-color: unset !important;
-  background-clip: unset !important;
-  -webkit-background-clip: unset !important;
-  pointer-events: none !important;
-}
-
-/* 브라우저별 특수 처리 */
-@-moz-document url-prefix() {
-  a[href="/contact"], a[href="/contact"]:hover {
-    -moz-appearance: none !important;
-    caret-color: transparent !important;
-    outline: 0 !important;
-    border-left: 0 !important;
-    border-right: 0 !important;
-  }
-}
-
-/* 웹킷 브라우저 특수 처리 */
-@supports (-webkit-appearance: none) {
-  a[href="/contact"], a[href="/contact"]:hover {
-    -webkit-appearance: none !important;
-    caret-color: transparent !important;
-    outline: 0 !important;
-    border-left: 0 !important;
-    border-right: 0 !important;
-    -webkit-text-stroke: 0 !important;
-  }
-}
-
-/* 강제 오버라이드 */
-html a[href="/contact"], 
-html a[href="/contact"]:hover, 
-html a[href="/contact"]:focus, 
-html a[href="/contact"]:active {
-  caret-color: transparent !important;
-  outline: 0 !important;
-  border-left: 0 !important;
-  border-right: 0 !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-}
-
-/* 궁극의 해결책 - 모든 div, button, span 요소 세로줄 완전 차단 */
-div, div:hover, div:focus, div:active,
-button, button:hover, button:focus, button:active,
-span, span:hover, span:focus, span:active {
-  caret-color: transparent !important;
-  outline: none !important;
-  border-left: none !important;
-  border-right: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  -webkit-text-stroke: none !important;
-  -webkit-text-fill-color: unset !important;
-  background-image: none !important;
-  text-decoration: none !important;
-  cursor: default !important;
-  user-select: none !important;
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-}
-
-/* 특별히 클릭 가능한 div 요소들 */
-div[onclick], div[onclick]:hover, div[onclick]:focus, div[onclick]:active {
-  caret-color: transparent !important;
-  outline: none !important;
-  border-left: none !important;
-  border-right: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  -webkit-text-stroke: none !important;
-  cursor: pointer !important;
-}
-
-/* 홈 섹션의 모든 요소 */
-#home div, #home div:hover, #home div:focus, #home div:active,
-#home span, #home span:hover, #home span:focus, #home span:active,
-#home svg, #home svg:hover, #home svg:focus, #home svg:active {
-  caret-color: transparent !important;
-  outline: none !important;
-  border-left: none !important;
-  border-right: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  -webkit-text-stroke: none !important;
-}
-
-/* 강제 글로벌 오버라이드 */
-body div, body div:hover, body span, body span:hover, body svg, body svg:hover {
-  caret-color: transparent !important;
-  outline: none !important;
-  border-left: none !important;
-  border-right: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-}
-
-/* 궁극의 해결책 - 브라우저의 텍스트 선택 모드 완전 차단 */
-*, *::before, *::after {
-  -webkit-touch-callout: none !important;
-  -webkit-user-select: none !important;
-  -khtml-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-  cursor: default !important;
-}
-
-/* 특별히 클릭 가능한 요소들은 pointer cursor */
-div[onclick], a, button, [role="button"] {
-  cursor: pointer !important;
-}
-
-/* 텍스트 선택이 필요한 요소들만 예외 */
-input, textarea, [contenteditable="true"] {
-  -webkit-user-select: text !important;
-  -moz-user-select: text !important;
-  -ms-user-select: text !important;
-  user-select: text !important;
-  cursor: text !important;
-}
-
-/* Chrome의 고유한 텍스트 선택 문제 해결 */
-body {
-  -webkit-user-select: none !important;
-  -webkit-touch-callout: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-}
-
-/* 모든 가능한 브라우저 커서 문제 해결 */
-:not(input):not(textarea):not([contenteditable="true"]) {
-  cursor: default !important;
-  caret-color: transparent !important;
-}
-
-/* Contact 버튼의 텍스트 선택 완전 차단 */
-div[onclick*="contact"], div[onclick*="contact"] * {
-  cursor: pointer !important;
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
-  -webkit-touch-callout: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-  text-shadow: none !important;
-}
-
-/* 극강 세로줄 완전 제거 - 최우선순위 */
-html *, html *:hover, html *:focus, html *:active, html *:visited {
-  caret-color: transparent !important;
-  outline: 0 !important;
-  border-left: 0 !important;
-  border-right: 0 !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  -webkit-text-stroke: 0 !important;
-  -webkit-text-fill-color: inherit !important;
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
-  -webkit-touch-callout: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-  cursor: default !important;
-}
-
-/* 클릭 가능한 요소만 pointer cursor */
-html div[onclick], html a, html button, html [role="button"] {
-  cursor: pointer !important;
-}
-
-/* 텍스트 입력 필드만 예외 */
-html input, html textarea, html [contenteditable="true"] {
-  -webkit-user-select: text !important;
-  -moz-user-select: text !important;
-  -ms-user-select: text !important;
-  user-select: text !important;
-  cursor: text !important;
-  caret-color: auto !important;
-}
-
-/* Contact 버튼 전용 세로줄 완전 제거 */
-.contact-button, .contact-button *, 
-.contact-button:hover, .contact-button:hover *,
-.contact-button:focus, .contact-button:focus *,
-.contact-button:active, .contact-button:active * {
-  caret-color: transparent !important;
-  outline: none !important;
-  border-left: none !important;
-  border-right: none !important;
-  border-top: 2px solid white !important;
-  border-bottom: 2px solid white !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  -webkit-text-stroke: none !important;
-  -webkit-text-fill-color: inherit !important;
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
-  -webkit-touch-callout: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-  cursor: pointer !important;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  appearance: none !important;
-  background-image: none !important;
-  text-decoration: none !important;
-}
-
-/* Contact 버튼의 span과 svg 요소 */
-.contact-button span, .contact-button svg, .contact-button path {
-  caret-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
-  pointer-events: none !important;
-}
-
-/* 브라우저별 강제 오버라이드 */
-body .contact-button,
-body .contact-button *,
-html .contact-button,
-html .contact-button * {
-  caret-color: transparent !important;
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  user-select: none !important;
-  outline: none !important;
-  border-left: none !important;
-  border-right: none !important;
-}
-
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  .contact-button, .contact-button * {
-    -webkit-user-select: none !important;
-    -webkit-touch-callout: none !important;
-    caret-color: transparent !important;
-  }
-}
-
-/* 서비스 소개 섹션 세로줄 완전 제거 */
-#services, #services *, 
-#services a, #services a *, 
-#services button, #services button *,
-#services div, #services div *,
-#services span, #services span *,
-#services svg, #services svg * {
-  caret-color: transparent !important;
-  outline: none !important;
-  border-left: none !important;
-  border-right: none !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  -webkit-text-stroke: none !important;
-  -webkit-text-fill-color: unset !important;
-  background-clip: unset !important;
-  -webkit-background-clip: unset !important;
-  text-decoration: none !important;
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
-  -webkit-touch-callout: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-}
-
-/* Contact 버튼 전용 강화 */
-a[href="/contact"], a[href="/contact"] *,
-.contact-button, .contact-button *,
-.contact-button:hover, .contact-button:hover *,
-.contact-button:focus, .contact-button:focus *,
-.contact-button:active, .contact-button:active * {
-  caret-color: transparent !important;
-  outline: 0 !important;
-  border: 0 !important;
-  border-left: 0 !important;
-  border-right: 0 !important;
-  border-top: 0 !important;
-  border-bottom: 0 !important;
-  box-shadow: none !important;
-  text-shadow: none !important;
-  -webkit-text-stroke: 0 !important;
-  -webkit-text-fill-color: unset !important;
-  background-clip: unset !important;
-  -webkit-background-clip: unset !important;
-  text-decoration: none !important;
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
-  -webkit-touch-callout: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-  appearance: none !important;
-}
-
-/* 모든 상태에서 세로줄 제거 */
-*:hover, *:focus, *:active, *:visited {
-  caret-color: transparent !important;
-  outline: none !important;
-  border-left: none !important;
-  border-right: none !important;
-  text-shadow: none !important;
 }

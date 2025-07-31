@@ -18,7 +18,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 환경 변수 검증
+    // 환경 변수 검증 (디버깅 추가)
+    console.log('=== 환경변수 디버깅 ===');
+    console.log('GMAIL_USER:', process.env.GMAIL_USER ? '설정됨' : '미설정');
+    console.log('GMAIL_PASS:', process.env.GMAIL_PASS ? '설정됨' : '미설정');
+    console.log('GMAIL_USER 값:', process.env.GMAIL_USER);
+    console.log('GMAIL_PASS 길이:', process.env.GMAIL_PASS?.length);
+    
     if (!process.env.GMAIL_USER || !process.env.GMAIL_PASS) {
       console.error('Gmail 환경 변수가 설정되지 않았습니다.');
       

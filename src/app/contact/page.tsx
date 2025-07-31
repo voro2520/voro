@@ -2,6 +2,11 @@
 
 import { useState } from 'react';
 
+// 디버깅용 로그 함수
+const debugLog = (message: string, data?: any) => {
+  console.log(`🔍 [DEBUG] ${message}`, data);
+};
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -12,6 +17,9 @@ export default function Contact() {
     description: '',
     agreePrivacy: false
   });
+
+  // 상태 초기화 디버깅
+  debugLog('Component initialized with formData:', formData);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
@@ -181,6 +189,30 @@ export default function Contact() {
         <p>또는 아래 폼을 작성해주세요</p>
       </div>
 
+      {/* 디버깅 패널 */}
+      <div style={{
+        position: 'fixed',
+        top: '10px',
+        right: '10px',
+        background: '#000',
+        color: '#fff',
+        padding: '15px',
+        borderRadius: '8px',
+        fontSize: '12px',
+        fontFamily: 'monospace',
+        maxWidth: '300px',
+        zIndex: 9999,
+        border: '2px solid #007bff'
+      }}>
+        <div style={{ fontWeight: 'bold', marginBottom: '8px' }}>🔍 LIVE DEBUG</div>
+        <div>Name: "{formData.name}"</div>
+        <div>Description: "{formData.description.substring(0, 20)}{formData.description.length > 20 ? '...' : ''}"</div>
+        <div>Service: "{formData.serviceType}"</div>
+        <div style={{ marginTop: '5px', fontSize: '10px', color: '#ccc' }}>
+          브라우저 콘솔(F12)도 확인하세요!
+        </div>
+      </div>
+
       {/* Contact Form */}
       <form 
         onSubmit={handleSubmit}
@@ -207,8 +239,14 @@ export default function Contact() {
             marginBottom: '20px' 
           }}>
             <div>
-              <label htmlFor="name" style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#333' }}>
-                이름 *
+              <label htmlFor="name" style={{ 
+                display: 'block', 
+                marginBottom: '8px', 
+                fontWeight: 'bold', 
+                color: '#333',
+                fontSize: '18px'
+              }}>
+                이름 * (테스트)
               </label>
               <input
                 type="text"
@@ -217,22 +255,43 @@ export default function Contact() {
                 required
                 value={formData.name}
                 onChange={(e) => {
-                  console.log('🔥 DIRECT onChange:', e.target.value);
-                  setFormData(prev => ({ ...prev, name: e.target.value }));
+                  debugLog('✅ Name input changed:', e.target.value);
+                  setFormData(prev => {
+                    const newData = { ...prev, name: e.target.value };
+                    debugLog('✅ New formData after name change:', newData);
+                    return newData;
+                  });
                 }}
-                onFocus={() => console.log('🔥 DIRECT onFocus: name')}
-                onClick={() => console.log('🔥 DIRECT onClick: name')}
-                placeholder="홍길동"
+                onFocus={(e) => {
+                  debugLog('✅ Name input focused');
+                  e.target.style.borderColor = '#007bff';
+                }}
+                onBlur={(e) => {
+                  debugLog('✅ Name input blurred');
+                  e.target.style.borderColor = '#000';
+                }}
+                onClick={() => debugLog('✅ Name input clicked')}
+                placeholder="클릭해서 입력해보세요"
                 style={{
                   width: '100%',
-                  padding: '12px',
-                  fontSize: '16px',
-                  border: '2px solid #000',
-                  borderRadius: '5px',
-                  backgroundColor: '#fff',
-                  color: '#000'
+                  padding: '15px',
+                  fontSize: '18px',
+                  border: '3px solid #000',
+                  borderRadius: '8px',
+                  backgroundColor: '#ffffff',
+                  color: '#000000',
+                  boxSizing: 'border-box',
+                  fontFamily: 'monospace'
                 }}
               />
+              <div style={{ 
+                marginTop: '5px', 
+                fontSize: '14px', 
+                color: '#666',
+                fontFamily: 'monospace'
+              }}>
+                현재 값: "{formData.name}"
+              </div>
             </div>
             
             <div>
@@ -365,33 +424,60 @@ export default function Contact() {
           </div>
 
           <div>
-            <label htmlFor="description" style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#333' }}>
-              어떤 사이트를 원하시나요?
+            <label htmlFor="description" style={{ 
+              display: 'block', 
+              marginBottom: '8px', 
+              fontWeight: 'bold', 
+              color: '#333',
+              fontSize: '18px'
+            }}>
+              어떤 사이트를 원하시나요? (테스트)
             </label>
             <textarea
               id="description"
               name="description"
               value={formData.description}
               onChange={(e) => {
-                console.log('🔥 DIRECT textarea onChange:', e.target.value);
-                setFormData(prev => ({ ...prev, description: e.target.value }));
+                debugLog('✅ Description textarea changed:', e.target.value);
+                setFormData(prev => {
+                  const newData = { ...prev, description: e.target.value };
+                  debugLog('✅ New formData after description change:', newData);
+                  return newData;
+                });
               }}
-              onFocus={() => console.log('🔥 DIRECT textarea onFocus')}
-              onClick={() => console.log('🔥 DIRECT textarea onClick')}
-              rows={5}
-              placeholder="원하시는 기능이나 참고할 사이트, 궁금한 점 등을 자유롭게 적어주세요."
+              onFocus={(e) => {
+                debugLog('✅ Description textarea focused');
+                e.target.style.borderColor = '#007bff';
+              }}
+              onBlur={(e) => {
+                debugLog('✅ Description textarea blurred');
+                e.target.style.borderColor = '#000';
+              }}
+              onClick={() => debugLog('✅ Description textarea clicked')}
+              rows={6}
+              placeholder="여기를 클릭해서 텍스트를 입력해보세요..."
               style={{
                 width: '100%',
-                padding: '12px',
+                padding: '15px',
                 fontSize: '16px',
                 border: '3px solid #000',
-                borderRadius: '5px',
+                borderRadius: '8px',
                 backgroundColor: '#ffffff',
                 color: '#000000',
-                minHeight: '120px',
-                fontFamily: 'Arial, sans-serif'
+                minHeight: '150px',
+                fontFamily: 'monospace',
+                boxSizing: 'border-box',
+                resize: 'vertical'
               }}
             />
+            <div style={{ 
+              marginTop: '5px', 
+              fontSize: '14px', 
+              color: '#666',
+              fontFamily: 'monospace'
+            }}>
+              현재 값: "{formData.description}" (길이: {formData.description.length})
+            </div>
           </div>
         </div>
 

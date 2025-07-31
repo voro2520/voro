@@ -17,12 +17,22 @@ export default function Contact() {
   const [submitMessage, setSubmitMessage] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    console.log('Input change detected:', e.target.name, e.target.value);
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
+  };
+
+  const handleInputFocus = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    console.log('Input focused:', e.target.name);
+  };
+
+  const handleInputClick = (e: React.MouseEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    console.log('Input clicked:', e.currentTarget.name);
+    e.stopPropagation();
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -85,7 +95,9 @@ export default function Contact() {
       margin: '0 auto',
       padding: '20px',
       background: 'white',
-      minHeight: '100vh'
+      minHeight: '100vh',
+      position: 'relative',
+      zIndex: 1
     }}>
       
       {/* Header */}
@@ -164,7 +176,13 @@ export default function Contact() {
       </div>
 
       {/* Contact Form */}
-      <form onSubmit={handleSubmit}>
+      <form 
+        onSubmit={handleSubmit}
+        style={{
+          position: 'relative',
+          zIndex: 2
+        }}
+      >
         
         {/* 기본 정보 */}
         <div style={{
@@ -193,6 +211,8 @@ export default function Contact() {
                 required
                 value={formData.name}
                 onChange={handleInputChange}
+                onFocus={handleInputFocus}
+                onClick={handleInputClick}
                 placeholder="홍길동"
                 style={{
                   width: '100%',
@@ -202,7 +222,12 @@ export default function Contact() {
                   borderRadius: '5px',
                   background: 'white',
                   color: 'black',
-                  boxSizing: 'border-box'
+                  boxSizing: 'border-box',
+                  outline: 'none',
+                  pointerEvents: 'auto',
+                  userSelect: 'text',
+                  cursor: 'text',
+                  zIndex: 'auto'
                 }}
               />
             </div>
@@ -226,7 +251,12 @@ export default function Contact() {
                   borderRadius: '5px',
                   background: 'white',
                   color: 'black',
-                  boxSizing: 'border-box'
+                  boxSizing: 'border-box',
+                  outline: 'none',
+                  pointerEvents: 'auto',
+                  userSelect: 'text',
+                  cursor: 'text',
+                  zIndex: 'auto'
                 }}
               />
             </div>
@@ -257,7 +287,12 @@ export default function Contact() {
                   borderRadius: '5px',
                   background: 'white',
                   color: 'black',
-                  boxSizing: 'border-box'
+                  boxSizing: 'border-box',
+                  outline: 'none',
+                  pointerEvents: 'auto',
+                  userSelect: 'text',
+                  cursor: 'text',
+                  zIndex: 'auto'
                 }}
               />
             </div>
@@ -282,7 +317,12 @@ export default function Contact() {
                   borderRadius: '5px',
                   background: 'white',
                   color: 'black',
-                  boxSizing: 'border-box'
+                  boxSizing: 'border-box',
+                  outline: 'none',
+                  pointerEvents: 'auto',
+                  userSelect: 'text',
+                  cursor: 'text',
+                  zIndex: 'auto'
                 }}
               />
             </div>
@@ -317,7 +357,10 @@ export default function Contact() {
                 background: 'white',
                 color: 'black',
                 boxSizing: 'border-box',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                outline: 'none',
+                pointerEvents: 'auto',
+                zIndex: 'auto'
               }}
             >
               <option value="">선택해주세요</option>
@@ -339,6 +382,8 @@ export default function Contact() {
               name="description"
               value={formData.description}
               onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              onClick={handleInputClick}
               rows={5}
               placeholder="원하시는 기능이나 참고할 사이트, 궁금한 점 등을 자유롭게 적어주세요."
               style={{
@@ -351,7 +396,13 @@ export default function Contact() {
                 color: 'black',
                 resize: 'vertical',
                 boxSizing: 'border-box',
-                fontFamily: 'Arial, sans-serif'
+                fontFamily: 'Arial, sans-serif',
+                outline: 'none',
+                pointerEvents: 'auto',
+                userSelect: 'text',
+                cursor: 'text',
+                zIndex: 'auto',
+                minHeight: '120px'
               }}
             />
           </div>

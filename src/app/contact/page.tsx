@@ -16,15 +16,16 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
-  const handleInputChange = (e: any) => {
-    const { name, value, type, checked } = e.target;
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     if (!formData.name || !formData.phone || !formData.email) {
@@ -48,7 +49,8 @@ export default function Contact() {
         },
         body: JSON.stringify({
           ...formData,
-          serviceTypes: formData.serviceType ? [formData.serviceType] : []
+          serviceTypes: formData.serviceType ? [formData.serviceType] : [],
+          serviceType: formData.serviceType
         }),
       });
 
@@ -113,7 +115,9 @@ export default function Contact() {
       {/* Quick Contact */}
       <div style={{
         display: 'flex',
-        gap: '20px',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: '15px',
         justifyContent: 'center',
         marginBottom: '40px'
       }}>
@@ -129,7 +133,9 @@ export default function Contact() {
             textDecoration: 'none',
             borderRadius: '8px',
             fontWeight: 'bold',
-            fontSize: '16px'
+            fontSize: '16px',
+            minWidth: '200px',
+            textAlign: 'center'
           }}
         >
           💬 카카오톡 상담하기
@@ -144,7 +150,9 @@ export default function Contact() {
             textDecoration: 'none',
             borderRadius: '8px',
             fontWeight: 'bold',
-            fontSize: '16px'
+            fontSize: '16px',
+            minWidth: '200px',
+            textAlign: 'center'
           }}
         >
           📞 전화 상담하기
@@ -168,7 +176,12 @@ export default function Contact() {
         }}>
           <h2 style={{ marginBottom: '25px', color: 'black' }}>📝 기본 정보</h2>
           
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+            gap: '20px', 
+            marginBottom: '20px' 
+          }}>
             <div>
               <label htmlFor="name" style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#333' }}>
                 이름 *
@@ -219,7 +232,11 @@ export default function Contact() {
             </div>
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+            gap: '20px' 
+          }}>
             <div>
               <label htmlFor="phone" style={{ display: 'block', marginBottom: '8px', fontWeight: 'bold', color: '#333' }}>
                 연락처 *
@@ -299,7 +316,8 @@ export default function Contact() {
                 borderRadius: '5px',
                 background: 'white',
                 color: 'black',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                cursor: 'pointer'
               }}
             >
               <option value="">선택해주세요</option>
@@ -368,9 +386,18 @@ export default function Contact() {
               name="agreePrivacy"
               checked={formData.agreePrivacy}
               onChange={handleInputChange}
-              style={{ width: '18px', height: '18px' }}
+              style={{ 
+                width: '18px', 
+                height: '18px',
+                cursor: 'pointer',
+                accentColor: 'black'
+              }}
             />
-            <label htmlFor="agreePrivacy" style={{ color: '#333', fontWeight: '500' }}>
+            <label htmlFor="agreePrivacy" style={{ 
+              color: '#333', 
+              fontWeight: '500',
+              cursor: 'pointer'
+            }}>
               개인정보 수집 및 이용에 동의합니다. *
             </label>
           </div>

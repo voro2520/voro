@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
       console.log('회사:', formData.company || '개인');
       console.log('연락처:', formData.phone);
       console.log('이메일:', formData.email);
-      console.log('서비스 유형:', formData.serviceTypes?.join(', ') || '선택안함');
+      console.log('서비스 유형:', formData.serviceType || formData.serviceTypes?.join(', ') || '선택안함');
       console.log('프로젝트 유형:', formData.projectType || '선택안함');
       console.log('예산:', formData.budget || '선택안함');
       console.log('기간:', formData.period || '선택안함');
@@ -143,7 +143,9 @@ export async function POST(request: NextRequest) {
                   <tr>
                     <td style="padding: 12px 0; font-weight: 600; color: #333; width: 120px; vertical-align: top;">서비스 유형</td>
                     <td style="padding: 12px 0; color: #666;">
-                      ${formData.serviceTypes && formData.serviceTypes.length > 0 
+                      ${formData.serviceType 
+                        ? `<span style="background-color: #000; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; margin-right: 8px; margin-bottom: 4px; display: inline-block; font-weight: 600;">${formData.serviceType}</span>`
+                        : formData.serviceTypes && formData.serviceTypes.length > 0 
                         ? formData.serviceTypes.map((service: string) => `<span style="background-color: #000; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; margin-right: 8px; margin-bottom: 4px; display: inline-block; font-weight: 600;">${service}</span>`).join(' ')
                         : '<span style="color: #999;">선택안함</span>'
                       }
@@ -223,7 +225,7 @@ export async function POST(request: NextRequest) {
 이메일: ${formData.email}
 
 === 프로젝트 정보 ===
-서비스 유형: ${formData.serviceTypes?.join(', ') || '선택안함'}
+서비스 유형: ${formData.serviceType || formData.serviceTypes?.join(', ') || '선택안함'}
 제작 유형: ${formData.projectType || '선택안함'}
 예상 예산: ${formData.budget || '선택안함'}
 완료 기간: ${formData.period || '선택안함'}
